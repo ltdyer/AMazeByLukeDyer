@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
+        android:id="@+id/Generating_maze_progress"
         android:layout_width="150dp"
         android:layout_height="176dp"
         android:layout_marginTop="148dp"

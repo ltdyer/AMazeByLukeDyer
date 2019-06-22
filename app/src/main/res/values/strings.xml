@@ -5,6 +5,13 @@
         <item>Prim</item>
         <item>Kruskal</item>
     </string-array>
+
+    <string-array name="operation_choices_array">
+        <item>Manual</item>
+        <item>WallFollower</item>
+        <item>Wizard</item>
+    </string-array>
+
     <string name="revisit_string">You have chosen revisit</string>
     <string name="explore_chosen_string"></string>
     <string name="explore_button_string">Explore</string>

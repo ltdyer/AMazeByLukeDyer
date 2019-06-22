@@ -20,6 +20,9 @@ import java.util.List;
 
 public class AMazeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    final public static String GENERATIONALGO = null;
+    final public static String SKILLLEVEL = null;
+    final public static String OPERATIONMODE = null;
     private SeekBar selectSkillBar;
     private Button revisitButton;
     private Button exploreButton;
@@ -27,6 +30,7 @@ public class AMazeActivity extends AppCompatActivity implements AdapterView.OnIt
     private Spinner exploreChosen;
     private TextView exploreChosenText;
     private Button startButton;
+    private Spinner operationMode;
 
     /**
      * Interface definition for overriding the onClick built in method. Not entirely necessary but makes the code cleaner by not putting everything in the constructor
@@ -35,6 +39,7 @@ public class AMazeActivity extends AppCompatActivity implements AdapterView.OnIt
     private View.OnClickListener visibilityClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            //when we come back, maye try and make explore invisible if revisit is clicked but maybe just move on
             makeExplorerSpinnerVisible(v);
         }
     };
@@ -54,16 +59,23 @@ public class AMazeActivity extends AppCompatActivity implements AdapterView.OnIt
         exploreButton = (Button) findViewById(R.id.Explore_button);
 
         revisitChosen = (TextView) findViewById(R.id.Revisit_chosen);
+
         exploreChosen = (Spinner) findViewById(R.id.Explore_chosen);
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.explore_choices_array, android.R.layout.simple_spinner_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         exploreChosen.setAdapter(arrayAdapter);
         exploreChosen.setOnItemSelectedListener(this);
 
+        operationMode = (Spinner) findViewById(R.id.Operation_mode);
+        ArrayAdapter<CharSequence> arrayAdapter2 = ArrayAdapter.createFromResource(this, R.array.operation_choices_array, android.R.layout.simple_spinner_item);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        operationMode.setAdapter(arrayAdapter2);
+        operationMode.setOnItemSelectedListener(this);
 
         startButton = (Button) findViewById(R.id.start_button);
 
         exploreButton.setOnClickListener(visibilityClickListener);
+        revisitButton.setOnClickListener(visibilityClickListener);
         selectSkillLevelListener();
 
     }
@@ -101,16 +113,18 @@ public class AMazeActivity extends AppCompatActivity implements AdapterView.OnIt
     public void makeExplorerSpinnerVisible(View view) {
         if (exploreChosen.getVisibility() == View.GONE || exploreChosen.getVisibility() == View.INVISIBLE) {
             exploreChosen.setVisibility(View.VISIBLE);
+            revisitButton.setVisibility(View.INVISIBLE);
         }
         else {
             exploreChosen.setVisibility(View.INVISIBLE);
+
         }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         Log.v("Maze generations is: ", ""+id);
-        Toast.makeText(parent.getContext(), "OnItemSelectedListener: " + parent.getItemAtPosition(pos).toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(parent.getContext(), "You Have Selected: " + parent.getItemAtPosition(pos).toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -119,20 +133,24 @@ public class AMazeActivity extends AppCompatActivity implements AdapterView.OnIt
     }
 
 
+
+
     /**
      * Method that moves the app from the main menu to the maze generation screen when the start button is pressed
      * @param view
      */
     public void changeToGeneratingState(View view) {
-        String keyIdentifierSpinner = null;
-        String keyIdentifierSkillBar = null;
-        String skill = "Skill";
-        String alg = "Algorithm";
+        String keyIdentifierSpinnerAlgo = null;
+        String keyIdentifierSpinnerOperation = null;
+
 
         Intent intent1 = new Intent(this, GeneratingActivity.class);
-        keyIdentifierSpinner = ((Spinner) findViewById(R.id.Explore_chosen)).getSelectedItem().toString();
-        intent1.putExtra(skill, selectSkillBar.getProgress());
-        intent1.putExtra(alg, keyIdentifierSpinner);
+        keyIdentifierSpinnerAlgo = ((Spinner) findViewById(R.id.Explore_chosen)).getSelectedItem().toString();
+        keyIdentifierSpinnerOperation = ((Spinner) findViewById(R.id.Operation_mode)).getSelectedItem().toString();
+
+        intent1.putExtra(SKILLLEVEL, selectSkillBar.getProgress());
+        intent1.putExtra(GENERATIONALGO, keyIdentifierSpinnerAlgo);
+        intent1.putExtra(OPERATIONMODE, keyIdentifierSpinnerOperation);
 
         startActivity(intent1);
     }
