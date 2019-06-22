@@ -10,7 +10,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.PlayManuallyActivity_main);
+        setContentView(R.layout.playmanuallyactivity_main);
     }
 
     public void forwardClick(View view) {

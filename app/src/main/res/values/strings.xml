@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">AMazeByLukeDyer</string>
     <string-array name="explore_choices_array">
+        <item>Default</item>
         <item>Prim</item>
         <item>Kruskal</item>
-        <item>Default</item>
     </string-array>
     <string name="revisit_string">You have chosen revisit</string>
     <string name="explore_chosen_string"></string>

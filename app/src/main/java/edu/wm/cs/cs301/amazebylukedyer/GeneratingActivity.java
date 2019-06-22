@@ -10,7 +10,7 @@ public class GeneratingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.GeneratingActivity_main);
+        setContentView(R.layout.generatingactivity_main);
     }
 
     public void changeToPlayManuallyActivity(View view) {

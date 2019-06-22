@@ -9,6 +9,6 @@ public class FinishActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.FinishActivity_main);
+        setContentView(R.layout.finishactivity_main);
     }
 }

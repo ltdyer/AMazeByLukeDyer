@@ -95,12 +95,12 @@
         android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="188dp"
-
+        android:textColor="#000000"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-    <!--look up the android studio development page for how to implement spinner in java class-->
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <Button
         android:id="@+id/start_button"
@@ -115,16 +115,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         android:onClick="changeToGeneratingState"/>
-
-    <TextView
-        android:id="@+id/Explore_chosen_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
-        android:text="@string/explore_chosen_string"
-        app:layout_constraintBottom_toTopOf="@+id/start_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
