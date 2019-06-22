@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">AMazeByLukeDyer</string>
+    <string-array name="explore_choices_array">
+        <item>Prim</item>
+        <item>Kruskal</item>
+        <item>Default</item>
+    </string-array>
+    <string name="revisit_string">You have chosen revisit</string>
+    <string name="explore_chosen_string"></string>
+    <string name="explore_button_string">Explore</string>
+    <string name="revisit_button_string">Revisit</string>
+    <string name="generation_selection_string">Select Generation procedure</string>
+    <string name="skill_level_string">Skill Level</string>
+    <string name="maze_activity_string">Maze Game</string>
+    <string name="start_button_string">Start</string>
+    <string name="generating_activity_string">Generating Maze...</string>
+    <string name="show_walls_button_string">Show Walls</string>
+    <string name="show_full_maze_button_string">Show Full Maze</string>
+    <string name="show_solution_button_string">Show Solution</string>
+    <string name="up_button_string">⇧</string>
+    <string name="down_button_string">⇩</string>
+    <string name="left_button_string">⇦</string>
+    <string name="right_button_string">⇨</string>
+    <string name="back_button_string">Back</string>
+    <string name="skip_button_string">Skip</string>
+    <string name="pause_and_play_button_string">Pause/Play</string>
+    <string name="win_message_string">You Win!</string>
+    <string name="path_length_string">Path length</string>
+    <string name="go_back_string">Go back to play again</string>
+
+</resources>

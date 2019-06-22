@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlayManuallyActivity">
+
+    <Button
+        android:id="@+id/Show_walls_button"
+        android:layout_width="123dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/show_walls_button_string"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Show_full_maze_button"
+        android:layout_width="150dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/show_full_maze_button_string"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Show_solution_button"
+        android:layout_width="wrap_content"
+        android:layout_height="49dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/show_solution_button_string"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="374dp"
+        android:layout_height="375dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Show_full_maze_button"></LinearLayout>
+
+    <Button
+        android:id="@+id/up_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/right_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/up_button_string"
+        app:layout_constraintBottom_toTopOf="@+id/down_button"
+        app:layout_constraintEnd_toEndOf="@+id/right_button"
+        app:layout_constraintStart_toStartOf="@+id/left_button"
+        android:onClick="forwardClick"/>
+
+    <Button
+        android:id="@+id/down_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/down_button_string"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/right_button"
+        app:layout_constraintStart_toEndOf="@+id/left_button"
+        android:onClick="downClick"/>
+
+    <Button
+        android:id="@+id/left_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/left_button_string"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="leftClick"/>
+
+    <Button
+        android:id="@+id/right_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/right_button_string"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="rightClick"/>
+
+
+
+    <Button
+        android:id="@+id/skip_button"
+        android:layout_width="80dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/skip_button_string"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:onClick="changeToFinishActivity"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
