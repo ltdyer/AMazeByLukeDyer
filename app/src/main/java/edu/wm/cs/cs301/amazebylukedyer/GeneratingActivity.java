@@ -3,6 +3,7 @@ package edu.wm.cs.cs301.amazebylukedyer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,7 +17,8 @@ public class GeneratingActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
     private TextView progressBarString;
-    private Button startMazePlayButton;
+    private Button startManualMazePlayButton;
+    private Button startAutomaticMazePlayButton;
 
     final public static String MANUAL = null;
     final public static String ROBOT = null;
@@ -26,29 +28,73 @@ public class GeneratingActivity extends AppCompatActivity {
     final public static String SHOWSOLUTION = null;
     Intent intent;
 
-    int skillLevel;
+    int progress = 0;
+
+    String skillLevel;
     String generationAlgo;
+    String operationMode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.generatingactivity_main);
 
         Bundle mainMenuIntent = getIntent().getExtras();
-        skillLevel = mainMenuIntent.getInt(AMazeActivity.SKILLLEVEL);
+
+        skillLevel = mainMenuIntent.getString(AMazeActivity.SKILLLEVEL);
         generationAlgo = mainMenuIntent.getString(AMazeActivity.GENERATIONALGO);
+        operationMode = mainMenuIntent.getString(AMazeActivity.OPERATIONMODE);
 
 
-        intent = new Intent(this, PlayManuallyActivity.class);
 
-        Log.v("algorithm: ", ""+skillLevel);
-        Log.v("skill level: ", ""+generationAlgo);
+        Log.v("skill level: ", ""+skillLevel);
+        Log.v("algorithm: ", ""+generationAlgo);
+        Log.v("operation mode: ", ""+operationMode);
 
+
+
+        startManualMazePlayButton = (Button) findViewById(R.id.start_button_manual);
+        startAutomaticMazePlayButton = (Button) findViewById(R.id.start_button_robot);
         progressBar = (ProgressBar) findViewById(R.id.Generating_maze_progress);
+        progressBar.setMax(100);
+        Drawable draw=getResources().getDrawable(R.drawable.customprogressbar);
+        setProgressValue(progress);
         progressBarString = (TextView) findViewById(R.id.Generating_maze_string);
-        startMazePlayButton = (Button) findViewById(R.id.start_button);
+
+
 
     }
 
+
+    /**
+     * Utilizes the progressBar and a thread to emulate the maze being generated. In reality, it only is filled up a bit every 1000 ms because there is nothing to
+     * generate
+     * @param progress
+     */
+    public void setProgressValue(final int progress) {
+        progressBar.setProgress(progress);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                    Log.v("progress is: ", ""+progress);
+                }
+                catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+                setProgressValue(progress+10);
+                if (progress == 100) {
+                    Thread.currentThread().interrupt();
+                    makeOneOfTheStartButtonsVisible();
+                }
+            }
+        });
+        thread.start();
+        //makeOneOfTheStartButtonsVisible();
+        //change visibility of start button
+        // in that visibility method, a button for manual or automatic will appear based on the operationMode sent in
+    }
 
     /**
      * Overriding the click operation of the the back button
@@ -60,8 +106,8 @@ public class GeneratingActivity extends AppCompatActivity {
         switch(item.getItemId()) {
             case android.R.id.home:
                 Toast.makeText(this, "Back Button clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, AMazeActivity.class);
-                startActivity(intent);
+                Intent backintent = new Intent(this, AMazeActivity.class);
+                startActivity(backintent);
                 return true;
 
 
@@ -71,10 +117,42 @@ public class GeneratingActivity extends AppCompatActivity {
         }
     }
 
+    public void makeOneOfTheStartButtonsVisible() {
+        if (operationMode.equals("Manual")) {
+            startManualMazePlayButton.setVisibility(View.VISIBLE);
+        }
+        if (operationMode.equals("WallFollower") || operationMode.equals("Wizard")) {
+            startAutomaticMazePlayButton.setVisibility(View.VISIBLE);
+        }
+        else {
+            Log.v("no button, opMode is: ", ""+operationMode);
+        }
+    }
+
 
 
 
 
     public void changeToPlayManuallyActivity(View view) {
+
+        intent = new Intent(this, PlayManuallyActivity.class);
+
+        intent.putExtra(AMazeActivity.GENERATIONALGO, generationAlgo);
+        intent.putExtra(AMazeActivity.SKILLLEVEL, skillLevel);
+        intent.putExtra(AMazeActivity.OPERATIONMODE, operationMode);
+
+
+        startActivity(intent);
+    }
+
+    public void changeToPlayAutomaticActivity(View view) {
+        intent = new Intent(this, PlayManuallyActivity.class);
+
+        intent.putExtra(AMazeActivity.GENERATIONALGO, generationAlgo);
+        intent.putExtra(AMazeActivity.SKILLLEVEL, skillLevel);
+        intent.putExtra(AMazeActivity.OPERATIONMODE, operationMode);
+
+
+        startActivity(intent);
     }
 }

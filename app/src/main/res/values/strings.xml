@@ -20,6 +20,8 @@
     <string name="skill_level_string">Skill Level</string>
     <string name="maze_activity_string">Maze Game</string>
     <string name="start_button_string">Start</string>
+    <string name="start_button_string_manual">Start Manual</string>
+    <string name="start_button_string_robot">Start Robot</string>
     <string name="generating_activity_string">Generating Maze...</string>
     <string name="show_walls_button_string">Show Walls</string>
     <string name="show_full_maze_button_string">Show Full Maze</string>

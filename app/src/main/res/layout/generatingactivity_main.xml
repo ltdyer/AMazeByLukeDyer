@@ -18,8 +18,12 @@
 
     <ProgressBar
         android:id="@+id/Generating_maze_progress"
-        android:layout_width="150dp"
-        android:layout_height="176dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/customprogressbar"
         android:layout_marginTop="148dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -27,13 +31,26 @@
         app:layout_constraintTop_toBottomOf="@+id/Generating_maze_string" />
 
     <Button
-        android:id="@+id/start_button"
+        android:id="@+id/start_button_manual"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="@string/start_button_string"
+        android:onClick="changeToPlayManuallyActivity"
+        android:text="@string/start_button_string_manual"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:onClick="changeToPlayManuallyActivity"/>
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/start_button_robot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:onClick="changeToPlayAutomaticActivity"
+        android:text="@string/start_button_string_robot"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

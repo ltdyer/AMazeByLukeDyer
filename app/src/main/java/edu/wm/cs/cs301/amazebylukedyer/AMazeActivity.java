@@ -152,6 +152,10 @@ public class AMazeActivity extends AppCompatActivity implements AdapterView.OnIt
         intent1.putExtra(GENERATIONALGO, keyIdentifierSpinnerAlgo);
         intent1.putExtra(OPERATIONMODE, keyIdentifierSpinnerOperation);
 
+        Log.v("skill level: ", ""+selectSkillBar.getProgress());
+        Log.v("generation algo is: ", ""+keyIdentifierSpinnerAlgo);
+        Log.v("operation mode is: ", ""+keyIdentifierSpinnerOperation);
+
         startActivity(intent1);
     }
 }
