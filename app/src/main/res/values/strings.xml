@@ -34,6 +34,7 @@
     <string name="skip_button_string">Skip</string>
     <string name="pause_and_play_button_string">Pause/Play</string>
     <string name="win_message_string">You Win!</string>
+    <string name="loss_message_string">Is this Loss?</string>
     <string name="path_length_string">Path length</string>
     <string name="go_back_string">Go back to play again</string>
 

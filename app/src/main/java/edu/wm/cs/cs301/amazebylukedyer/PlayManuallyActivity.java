@@ -29,13 +29,19 @@ public class PlayManuallyActivity extends AppCompatActivity {
     String generationAlgo;
     String operationMode;
 
+    public boolean visited = false;
+
     final public static String PATHLENGTH = "PATHLENGTH";
+    final public static String MANUAL = "MANUAL";
+    final public static String ROBOT = null;
+    final public static String RESULT = "RESULT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playmanuallyactivity_main);
 
+        visited = true;
 
         Bundle generatingActivityIntent = getIntent().getExtras();
 
@@ -132,15 +138,30 @@ public class PlayManuallyActivity extends AppCompatActivity {
     public void changeToFinishActivity(View view) {
 
         String keyIdentifierPathLength = null;
+        String keyIdentifierMode = null;
+        String keyIdentifierFakeMode = null;
+        String keyIdentifierResult = null;
 
         Intent intent = new Intent(this, FinishActivity.class);
         keyIdentifierPathLength = String.valueOf(pathLength);
+        keyIdentifierMode = "Manual";
+
+        //change keyIdentifierResult when we actually have the ability to win or lose; for now, default to win
+        keyIdentifierResult = "Win";
+
 
         intent.putExtra(PATHLENGTH, keyIdentifierPathLength);
+        intent.putExtra(MANUAL, keyIdentifierMode);
+        intent.putExtra(ROBOT, keyIdentifierFakeMode);
+        intent.putExtra(RESULT, keyIdentifierResult);
         Log.v("path length: ", keyIdentifierPathLength);
+        Log.v("operation mode: ", keyIdentifierMode);
+
 
         startActivity(intent);
-
+        finish();
 
     }
+
+
 }

@@ -156,18 +156,20 @@ public class GeneratingActivity extends AppCompatActivity {
         intent.putExtra(AMazeActivity.SKILLLEVEL, skillLevel);
         intent.putExtra(AMazeActivity.OPERATIONMODE, operationMode);
 
+        Log.v("we are in: ", "PlayManually");
 
         startActivity(intent);
         finish();
     }
 
     public void changeToPlayAutomaticActivity(View view) {
-        intent = new Intent(this, PlayManuallyActivity.class);
+        intent = new Intent(this, PlayAnimationActivity.class);
 
         intent.putExtra(AMazeActivity.GENERATIONALGO, generationAlgo);
         intent.putExtra(AMazeActivity.SKILLLEVEL, skillLevel);
         intent.putExtra(AMazeActivity.OPERATIONMODE, operationMode);
 
+        Log.v("we are in: ", "PlayAnimation");
 
         startActivity(intent);
         finish();
