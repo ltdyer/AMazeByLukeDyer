@@ -14,7 +14,8 @@
         android:layout_marginTop="16dp"
         android:text="@string/show_walls_button_string"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="showWalls"/>
 
     <Button
         android:id="@+id/Show_full_maze_button"
@@ -25,7 +26,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="showFullMaze"/>
 
     <Button
         android:id="@+id/Show_solution_button"
@@ -34,7 +36,8 @@
         android:layout_marginTop="16dp"
         android:text="@string/show_solution_button_string"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="showSolution"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"

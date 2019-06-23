@@ -41,6 +41,10 @@ public class GeneratingActivity extends AppCompatActivity {
 
         Bundle mainMenuIntent = getIntent().getExtras();
 
+        skillLevel = "LEVEL";
+        generationAlgo = "ALGORITHM";
+        operationMode = "OPERATION";
+
         skillLevel = mainMenuIntent.getString(AMazeActivity.SKILLLEVEL);
         generationAlgo = mainMenuIntent.getString(AMazeActivity.GENERATIONALGO);
         operationMode = mainMenuIntent.getString(AMazeActivity.OPERATIONMODE);
@@ -50,6 +54,7 @@ public class GeneratingActivity extends AppCompatActivity {
         Log.v("skill level: ", ""+skillLevel);
         Log.v("algorithm: ", ""+generationAlgo);
         Log.v("operation mode: ", ""+operationMode);
+
 
 
 
@@ -72,28 +77,37 @@ public class GeneratingActivity extends AppCompatActivity {
      * @param progress
      */
     public void setProgressValue(final int progress) {
+
+
         progressBar.setProgress(progress);
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                    Log.v("progress is: ", ""+progress);
-                }
-                catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-                setProgressValue(progress+10);
-                if (progress == 100) {
-                    Thread.currentThread().interrupt();
-                    makeOneOfTheStartButtonsVisible();
-                }
-            }
-        });
-        thread.start();
-        //makeOneOfTheStartButtonsVisible();
-        //change visibility of start button
-        // in that visibility method, a button for manual or automatic will appear based on the operationMode sent in
+        makeOneOfTheStartButtonsVisible();
+//        final Thread thread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//
+//                    Thread.sleep(1000);
+//
+//                }
+//                catch (InterruptedException ex) {
+//                    //how to deal with exception so thread stops? Code never makes it here
+//                    makeOneOfTheStartButtonsVisible();
+//
+//                }
+//
+//                setProgressValue(progress + 10);
+//                Log.v("progress is: ", "" + progress);
+//                if (progress >= 100) {
+//                    Log.v("interrupted?", ""+progress);
+//                    //even though we make it here, the thread is never stopped, it just keeps going
+//                    Thread.interrupted();
+//                }
+//
+//            }
+//        });
+//        thread.start();
+
+
     }
 
     /**
@@ -108,6 +122,7 @@ public class GeneratingActivity extends AppCompatActivity {
                 Toast.makeText(this, "Back Button clicked", Toast.LENGTH_SHORT).show();
                 Intent backintent = new Intent(this, AMazeActivity.class);
                 startActivity(backintent);
+                finish();
                 return true;
 
 
@@ -143,6 +158,7 @@ public class GeneratingActivity extends AppCompatActivity {
 
 
         startActivity(intent);
+        finish();
     }
 
     public void changeToPlayAutomaticActivity(View view) {
@@ -154,5 +170,6 @@ public class GeneratingActivity extends AppCompatActivity {
 
 
         startActivity(intent);
+        finish();
     }
 }

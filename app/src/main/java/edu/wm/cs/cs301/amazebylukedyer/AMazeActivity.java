@@ -20,9 +20,9 @@ import java.util.List;
 
 public class AMazeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    final public static String GENERATIONALGO = null;
-    final public static String SKILLLEVEL = null;
-    final public static String OPERATIONMODE = null;
+    final public static String GENERATIONALGO = "ALGORITHM";
+    final public static String SKILLLEVEL = "LEVEL";
+    final public static String OPERATIONMODE = "OPERATION";
     private SeekBar selectSkillBar;
     private Button revisitButton;
     private Button exploreButton;
@@ -123,7 +123,7 @@ public class AMazeActivity extends AppCompatActivity implements AdapterView.OnIt
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        Log.v("Maze generations is: ", ""+id);
+        Log.v("You chose: ", ""+id);
         Toast.makeText(parent.getContext(), "You Have Selected: " + parent.getItemAtPosition(pos).toString(), Toast.LENGTH_SHORT).show();
     }
 
@@ -140,19 +140,21 @@ public class AMazeActivity extends AppCompatActivity implements AdapterView.OnIt
      * @param view
      */
     public void changeToGeneratingState(View view) {
+        String keyIdentifierSeekBarSkillLevel = null;
         String keyIdentifierSpinnerAlgo = null;
         String keyIdentifierSpinnerOperation = null;
 
 
         Intent intent1 = new Intent(this, GeneratingActivity.class);
+        keyIdentifierSeekBarSkillLevel = ""+selectSkillBar.getProgress();
         keyIdentifierSpinnerAlgo = ((Spinner) findViewById(R.id.Explore_chosen)).getSelectedItem().toString();
         keyIdentifierSpinnerOperation = ((Spinner) findViewById(R.id.Operation_mode)).getSelectedItem().toString();
 
-        intent1.putExtra(SKILLLEVEL, selectSkillBar.getProgress());
+        intent1.putExtra(SKILLLEVEL, keyIdentifierSeekBarSkillLevel);
         intent1.putExtra(GENERATIONALGO, keyIdentifierSpinnerAlgo);
         intent1.putExtra(OPERATIONMODE, keyIdentifierSpinnerOperation);
 
-        Log.v("skill level: ", ""+selectSkillBar.getProgress());
+        Log.v("skill level: ", ""+keyIdentifierSeekBarSkillLevel);
         Log.v("generation algo is: ", ""+keyIdentifierSpinnerAlgo);
         Log.v("operation mode is: ", ""+keyIdentifierSpinnerOperation);
 
