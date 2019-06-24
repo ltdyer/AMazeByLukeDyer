@@ -75,6 +75,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * the following four methods are directional input methods
+     * @param view
+     */
     public void forwardClick(View view) {
         Toast.makeText(getBaseContext(), "Up!", Toast.LENGTH_SHORT).show();
         Log.v("movement: ", "forward");
@@ -97,7 +101,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * the following three methods are the toggle map, walls, and solution buttons
+     * @param view
+     */
     public void showWalls(View view) {
         Toast.makeText(getBaseContext(), "If this wasn't a test, I would be showing WALLS", Toast.LENGTH_SHORT).show();
         Log.v("Showing: ", "walls");
@@ -135,6 +142,10 @@ public class PlayManuallyActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * changes the activity from play manually to finish
+     * @param view
+     */
     public void changeToFinishActivity(View view) {
 
         String keyIdentifierPathLength = null;

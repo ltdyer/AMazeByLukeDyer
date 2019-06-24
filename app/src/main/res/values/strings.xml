@@ -16,6 +16,10 @@
     <string name="explore_chosen_string"></string>
     <string name="explore_button_string">Explore</string>
     <string name="revisit_button_string">Revisit</string>
+    <string name="level_zero_button_string">0</string>
+    <string name="level_one_button_string">1</string>
+    <string name="level_two_button_string">2</string>
+    <string name="refresh_button_string">REFRESH</string>
     <string name="generation_selection_string">Select Generation procedure</string>
     <string name="skill_level_string">Skill Level</string>
     <string name="maze_activity_string">Maze Game</string>

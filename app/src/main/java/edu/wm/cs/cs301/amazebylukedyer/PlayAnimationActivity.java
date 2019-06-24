@@ -68,6 +68,10 @@ public class PlayAnimationActivity extends AppCompatActivity {
         pathLength = 0;
     }
 
+    /**
+     * The following four methods are corresponding button presses for pause, show map, show walls, and show solution
+     * @param view
+     */
     public void pausePlayClick(View view) {
         Toast.makeText(getBaseContext(), "Pause!", Toast.LENGTH_SHORT).show();
         Log.v("screen: ", "paused");
@@ -110,6 +114,10 @@ public class PlayAnimationActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Changes the activity from PlayAnimation to Finish
+     * @param view
+     */
     public void changeToFinishActivity(View view) {
 
         String keyIdentifierPathLength = null;

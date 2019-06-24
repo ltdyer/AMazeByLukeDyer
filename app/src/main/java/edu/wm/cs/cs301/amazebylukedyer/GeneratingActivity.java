@@ -132,6 +132,9 @@ public class GeneratingActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Makes the corresponding start button visible based on the mode of operation
+     */
     public void makeOneOfTheStartButtonsVisible() {
         if (operationMode.equals("Manual")) {
             startManualMazePlayButton.setVisibility(View.VISIBLE);
@@ -145,9 +148,10 @@ public class GeneratingActivity extends AppCompatActivity {
     }
 
 
-
-
-
+    /**
+     * These two methods activate the coresponding Play activity base don mode of operation
+     * @param view
+     */
     public void changeToPlayManuallyActivity(View view) {
 
         intent = new Intent(this, PlayManuallyActivity.class);

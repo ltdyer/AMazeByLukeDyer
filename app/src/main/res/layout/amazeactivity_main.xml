@@ -63,6 +63,7 @@
         android:layout_marginTop="52dp"
         android:layout_marginEnd="32dp"
         android:text="@string/revisit_button_string"
+        android:onClick="makeRevisitChoicesVisible"
         app:layout_constraintEnd_toStartOf="@+id/Explore_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/generation_selection_title" />
@@ -124,6 +125,54 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/levelZero_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/level_zero_button_string"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/Explore_chosen"
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="levelZeroMaze"/>
+
+    <Button
+        android:id="@+id/levelOne_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="276dp"
+        android:text="@string/level_one_button_string"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="levelOneMaze"/>
+
+    <Button
+        android:id="@+id/levelTwo_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="276dp"
+        android:text="@string/level_two_button_string"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="levelTwoMaze"/>
+
+    <Button
+        android:id="@+id/refresh_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/refresh_button_string"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="refreshOptions"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
