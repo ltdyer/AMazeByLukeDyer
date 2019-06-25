@@ -121,7 +121,7 @@ public class AMazeActivity extends AppCompatActivity implements AdapterView.OnIt
 
     /**
      * Spinner method
-     * Method called by onClick when the explore button is pressed to make the spinner for choosing the generation algorithm visible
+     * Method called by onClick when the explore button is pressed to make the spinner for choosing the edu.wm.cs.cs301.amazebylukedyer.generation algorithm visible
      * @param view
      */
     public void makeExplorerSpinnerVisible(View view) {
@@ -144,7 +144,7 @@ public class AMazeActivity extends AppCompatActivity implements AdapterView.OnIt
     }
 
     /**
-     * Makes the buttons for previous maze generation visible. Makes explorer invisible
+     * Makes the buttons for previous maze edu.wm.cs.cs301.amazebylukedyer.generation visible. Makes explorer invisible
      * @param view
      */
     public void makeRevisitChoicesVisible(View view) {
@@ -176,7 +176,7 @@ public class AMazeActivity extends AppCompatActivity implements AdapterView.OnIt
 
 
     /**
-     * Method that moves the app from the main menu to the maze generation screen when the start button is pressed
+     * Method that moves the app from the main menu to the maze edu.wm.cs.cs301.amazebylukedyer.generation screen when the start button is pressed
      * @param view
      */
     public void changeToGeneratingState(View view) {
@@ -195,7 +195,7 @@ public class AMazeActivity extends AppCompatActivity implements AdapterView.OnIt
         intent1.putExtra(OPERATIONMODE, keyIdentifierSpinnerOperation);
 
         Log.v("skill level: ", ""+keyIdentifierSeekBarSkillLevel);
-        Log.v("generation algo is: ", ""+keyIdentifierSpinnerAlgo);
+        Log.v("edu.wm.cs.cs301.amazebylukedyer.generation algo is: ", ""+keyIdentifierSpinnerAlgo);
         Log.v("operation mode is: ", ""+keyIdentifierSpinnerOperation);
 
         startActivity(intent1);

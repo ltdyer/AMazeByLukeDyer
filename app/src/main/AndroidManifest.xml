@@ -9,31 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".AMazeActivity">
+        <activity android:name=".gui.MazePanel"></activity>
+        <activity android:name=".AMazeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".GeneratingActivity">
-        </activity>
-
-        <activity
-            android:name=".PlayManuallyActivity">
-        </activity>
-
-        <activity
-            android:name=".PlayAnimationActivity">
-        </activity>
-
-        <activity
-            android:name=".FinishActivity">
-        </activity>
-
+        <activity android:name=".GeneratingActivity"></activity>
+        <activity android:name=".PlayManuallyActivity"></activity>
+        <activity android:name=".PlayAnimationActivity"></activity>
+        <activity android:name=".FinishActivity"></activity>
     </application>
 
 </manifest>
