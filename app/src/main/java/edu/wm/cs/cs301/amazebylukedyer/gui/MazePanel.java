@@ -1,7 +1,12 @@
 package edu.wm.cs.cs301.amazebylukedyer.gui;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -14,6 +19,11 @@ public class MazePanel extends View {
     // https://developer.android.com/training/custom-views/custom-drawing
     // on how to implement your own View class
     //
+
+    private Paint paint;
+    private Bitmap bitmap;
+    private Canvas canvas;
+
     /**
      * Constructor with one context parameter.
      * @param context
@@ -32,6 +42,9 @@ public class MazePanel extends View {
         // call super class constructor as necessary
         // TODO: initialize instance variables as necessary
         super(context, app);
+        bitmap = Bitmap.createBitmap(400, 400, Bitmap.Config.ARGB_8888);
+        paint = new Paint();
+        canvas = new Canvas(bitmap);
     }
     /**
      * Draws given canvas.
@@ -40,6 +53,9 @@ public class MazePanel extends View {
     @Override
     public void onDraw(Canvas c) {
         // TODO: draw bitmap
+        super.onDraw(canvas);
+        canvas.drawBitmap(bitmap, 0, 0, paint);
+        invalidate();
     }
 
     /**
@@ -47,10 +63,14 @@ public class MazePanel extends View {
      * @param width
      * @param height
      */
-    @Override
-    public void onMeasure(int width, int height) {
-        // as described for superclass method
-    }
+//    @Override
+//    public void onMeasure(int width, int height) {
+//        // as described for superclass method
+//        int minw = getPaddingLeft() + getPaddingRight() + getSuggestedMinimumWidth();
+//        int w = resolveSizeAndState(minw, width, 1);
+//
+//        int minh = MeasureSpec.getSize(w) - (int)
+//    }
 
     /**
      * Updates maze graphics.
@@ -73,6 +93,7 @@ public class MazePanel extends View {
      */
     public void setColor(int color) {
         // TODO: set the current color
+        paint.setColor(color);
     }
 
     /**
@@ -100,6 +121,8 @@ public class MazePanel extends View {
      */
     public void fillRect(int x, int y, int width, int height) {
         // draw a filled rectangle on the canvas, requires decision on its color
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawRect(new Rect(x,y, x+width, y+height), paint);
     }
 
     /**
@@ -112,6 +135,14 @@ public class MazePanel extends View {
     public void fillPolygon(int[] xPoints, int[] yPoints, int nPoints){
         // translate the points into a path
         // draw a path on the canvas
+        paint.setStyle(Paint.Style.FILL);
+        Path path = new Path();
+        path.moveTo(xPoints[0], yPoints[0]);
+        for (int n = 1; n < nPoints; n++) {
+            path.lineTo(xPoints[n], yPoints[n]);
+        }
+        path.lineTo(xPoints[0], yPoints[0]);
+        canvas.drawPath(path, paint);
     }
 
     /**
@@ -123,6 +154,7 @@ public class MazePanel extends View {
      */
     public void drawLine(int x1, int y1, int x2, int y2) {
         // TODO: draw a line on the canvas
+        canvas.drawLine(x1, y1, x2, y2, paint);
     }
 
     /**
@@ -134,6 +166,9 @@ public class MazePanel extends View {
      */
     public void fillOval(int x, int y, int width, int height) {
         // TODO: draw an oval on the canvas
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawOval(new RectF(x,y,x+width,y+height),paint);
+
     }
 
 }
