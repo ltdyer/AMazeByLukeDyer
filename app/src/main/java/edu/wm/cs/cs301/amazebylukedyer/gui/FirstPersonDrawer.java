@@ -3,6 +3,14 @@
  */
 package edu.wm.cs.cs301.amazebylukedyer.gui;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+
+import edu.wm.cs.cs301.amazebylukedyer.generation.BSPLeaf;
+import edu.wm.cs.cs301.amazebylukedyer.generation.BSPNode;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Cells;
 import generation.BSPBranch;
 import generation.BSPLeaf;
 import generation.BSPNode;
@@ -66,14 +74,22 @@ public class FirstPersonDrawer {
 	private int angle;  
 	
 	/**
-	 * The drawing is performed on a Graphics object. Storing it makes
-	 * its access easier for code that traverses the tree of BSP nodes
-	 * to draw segments. Drawing is performed in a piecemeal manner on
-	 * a buffer image, such that updating the panel that is on screen 
-	 * with the current buffer image is the responsibility of
-	 * the StatePlaying class.
+	 * Graphics object that is drawn on
 	 */
-	private Graphics2D gc; 
+	private Canvas canvas;
+
+	/**
+	 * Bitmap communicates between draw methods
+	 */
+	Bitmap bitmap;
+
+	/**
+	 * view variables, calculated based on the x and y position of the player
+	 */
+	private int viewDirectionX;
+	private int viewDirectionY;
+	private int xView;
+	private int yView;
 	
 	/**
 	 * The current position (x,y) scaled by map_unit and 
@@ -142,41 +158,41 @@ public class FirstPersonDrawer {
 	}
 	/**
 	 * Draws the first person view on the screen during the game
-	 * @param panel for drawing on the buffer image
 	 * @param x coordinate of current position, only used to set viewX
 	 * @param y coordinate of current position, only used to set viewY
+	 * @param viewDirectionX the directional view, x component
+	 * @param viewDirectionY the directional view, y component
 	 * @param ang gives the current viewing angle
 	 * @param walkStep, only used to set viewX and viewY
+	 * @param offset, value used to calculate the views
+	 * @param rangeSet
 	 */
-	public void draw(MazePanel panel, int x, int y, int walkStep, int ang) {
-		// obtain a Graphics2D object we can draw on
-		Graphics g = panel.getBufferGraphics() ;
-        // viewers draw on the buffer graphics
-        if (null == g) {
-            System.out.println("FirstPersonDrawer.draw: can't get graphics object to draw on, skipping redraw operation") ;
-            return;
-        }
-        gc = (Graphics2D) g ;
-        
-        // update fields angle, viewx, viewy for current position and viewing angle
-        angle = ang ;
-        setView(x, y, walkStep);
-        
-        // update graphics
-        // draw background figure: black on bottom half, grey on top half
-        drawBackground(g);
-        // set color to white and draw what ever can be seen from the current position
-        g.setColor(Color.white);
-        // reset the set of ranges to a single new element (0,width-1)
-        // to cover the full width of the view 
-        // as we have not drawn any polygons (walls) yet.
-        rSet.set(0, viewWidth-1); 
-        
-        // debug: reset counters
-        traverseNodeCounter = traverseSegSectorCounter =
-        		drawRectCounter = drawRectLateCounter = drawRectSegmentCounter = 0;
-        //
-        drawAllVisibleSectors(bspRoot);
+	public void draw(int x, int y, int viewDirectionX, int viewDirectionY, int ang, int walkStep, int offset, RangeSet rangeSet) {
+
+		this.angle = ang;
+		this.viewDirectionX = viewDirectionX;
+		this.viewDirectionY = viewDirectionY;
+		this.rSet = rangeSet;
+		//find out how to do bitmap
+		canvas = new Canvas(bitmap);
+
+		//obtain view using predefined variables
+		xView = (mapUnit*x+mapUnit/2) + unscaleViewD(viewDirectionX*(stepSize*walkStep-offset));
+		yView = (mapUnit*y+mapUnit/2) + unscaleViewD(viewDirectionY*(stepSize*walkStep-offset));
+
+		//draw background
+		drawBackground(canvas);
+
+		//prime new paint to draw visible sectors
+		Paint paint = new Paint();
+		paint.setStyle(Paint.Style.FILL);
+
+		//draw what can be seen from this view at this position
+		paint.setColor(Color.WHITE);
+		rSet.set(0, viewWidth-1);
+		drawAllVisibleSectors(bspRoot);
+
+
 	}
 
 
@@ -205,15 +221,20 @@ public class FirstPersonDrawer {
 	/**
 	 * Draws a black and a grey rectangle to provide a background.
 	 * Note that this also erases previous drawings of maze or map.
-	 * @param graphics to draw on, must be not null
+	 * @param canvas to draw on, must be not null
 	 */
-	private void drawBackground(Graphics graphics) {
+	private void drawBackground(Canvas canvas) {
+		//make a new Paint
+		Paint paint = new Paint();
+		paint.setStyle(Paint.Style.FILL);
+
 		// black rectangle in upper half of screen
-		graphics.setColor(Color.black);
-		graphics.fillRect(0, 0, viewWidth, viewHeight/2);
+		paint.setColor(Color.BLACK);
+		canvas.drawRect(0, 0, viewWidth, viewHeight/2, paint);
+
 		// grey rectangle in lower half of screen
-		graphics.setColor(Color.darkGray);
-		graphics.fillRect(0, viewHeight/2, viewWidth, viewHeight/2);
+		paint.setColor(Color.GRAY);
+		canvas.drawRect(0, viewHeight/2, viewWidth, viewHeight, paint);
 	}
 	/**
 	 * Recursive method to explore tree of BSP nodes and draw all segments in leaf nodes 
