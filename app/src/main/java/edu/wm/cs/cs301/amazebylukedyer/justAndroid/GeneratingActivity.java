@@ -1,4 +1,4 @@
-package edu.wm.cs.cs301.amazebylukedyer;
+package edu.wm.cs.cs301.amazebylukedyer.justAndroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import edu.wm.cs.cs301.amazebylukedyer.R;
 
 public class GeneratingActivity extends AppCompatActivity {
 

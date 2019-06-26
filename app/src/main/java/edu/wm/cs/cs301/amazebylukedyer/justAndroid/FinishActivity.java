@@ -1,4 +1,4 @@
-package edu.wm.cs.cs301.amazebylukedyer;
+package edu.wm.cs.cs301.amazebylukedyer.justAndroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import edu.wm.cs.cs301.amazebylukedyer.R;
 
 public class FinishActivity extends AppCompatActivity {
 

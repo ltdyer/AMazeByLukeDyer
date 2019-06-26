@@ -1,4 +1,4 @@
-package edu.wm.cs.cs301.amazebylukedyer;
+package edu.wm.cs.cs301.amazebylukedyer.justAndroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,8 +21,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+
+import edu.wm.cs.cs301.amazebylukedyer.R;
 
 public class AMazeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 

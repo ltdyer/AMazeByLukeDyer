@@ -3,6 +3,7 @@ package edu.wm.cs.cs301.amazebylukedyer.gui;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
@@ -32,6 +33,10 @@ public class MazePanel extends View {
         // call super class constructor as necessary
         // TODO: initialize instance variables as necessary
         super(context);
+        bitmap = Bitmap.createBitmap(400, 400, Bitmap.Config.ARGB_8888);
+        paint = new Paint();
+        canvas = new Canvas(bitmap);
+
     }
     /**
      * Constructor with two parameters: context and attributes.
@@ -46,6 +51,8 @@ public class MazePanel extends View {
         paint = new Paint();
         canvas = new Canvas(bitmap);
     }
+
+
     /**
      * Draws given canvas.
      * @param c
@@ -63,20 +70,19 @@ public class MazePanel extends View {
      * @param width
      * @param height
      */
-//    @Override
-//    public void onMeasure(int width, int height) {
-//        // as described for superclass method
-//        int minw = getPaddingLeft() + getPaddingRight() + getSuggestedMinimumWidth();
-//        int w = resolveSizeAndState(minw, width, 1);
-//
-//        int minh = MeasureSpec.getSize(w) - (int)
-//    }
+    @Override
+    public void onMeasure(int width, int height) {
+        width = this.getMeasuredWidth();
+        height = this.getMeasuredHeight();
+        setMeasuredDimension(width, height);
+    }
 
     /**
      * Updates maze graphics.
      */
     public void update() {
         //TODO: update maze graphics
+        invalidate();
     }
 
     /**
@@ -85,6 +91,21 @@ public class MazePanel extends View {
      */
     public void setColor(String c) {
         // TODO: same as setColor(int) but for string parameters
+        if ("Red".equals(c)) {
+            paint.setColor(Color.RED);
+        }
+        else if ("Blue".equals(c)) {
+            paint.setColor(Color.BLUE);
+        }
+        else if("Black".equals(c)) {
+            paint.setColor(Color.BLACK);
+        }
+        else if("Gray".equals(c)) {
+            paint.setColor(Color.GRAY);
+        }
+        else if("White".equals(c)) {
+            paint.setColor(Color.WHITE);
+        }
     }
 
     /**
@@ -102,6 +123,8 @@ public class MazePanel extends View {
      */
     public static int getColorEncoding(int red, int green, int blue) {
         // TODO: provide rgb color encoding
+        int color = Color.rgb(red, green, blue);
+        return color;
     }
 
     /**
@@ -110,6 +133,7 @@ public class MazePanel extends View {
      */
     public int getColor() {
         // TODO return the current color setting
+        return 1;
     }
 
     /**
