@@ -361,7 +361,7 @@ public class Seg {
     /**
      * @return the color
      */
-    public Color getColor() {
+    public int getColor() {
         return col;
     }
 

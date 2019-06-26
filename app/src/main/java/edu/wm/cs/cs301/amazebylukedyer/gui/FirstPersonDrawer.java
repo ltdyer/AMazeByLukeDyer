@@ -8,18 +8,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import java.util.ArrayList;
+
+import edu.wm.cs.cs301.amazebylukedyer.generation.BSPBranch;
 import edu.wm.cs.cs301.amazebylukedyer.generation.BSPLeaf;
 import edu.wm.cs.cs301.amazebylukedyer.generation.BSPNode;
 import edu.wm.cs.cs301.amazebylukedyer.generation.Cells;
-import generation.BSPBranch;
-import generation.BSPLeaf;
-import generation.BSPNode;
-import generation.Cells;
-import generation.Seg;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.util.ArrayList;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Seg;
 
 /**
  * This class encapsulates all functionality for drawing the current view 
@@ -447,7 +442,9 @@ public class FirstPersonDrawer {
 		
 		// moved code for drawing bits and pieces into yet another method to 
 		// gain more clarity on what information is actually needed
-		gc.setColor(seg.getColor());
+		Paint paint = new Paint();
+		paint.setColor(seg.getColor());
+		paint.setStyle(Paint.Style.FILL);
 		boolean drawn = drawSegmentPolygons(x1, x2, y11, y12, y21, y22);
 		
 		if (drawn && !seg.isSeen()) {
@@ -527,7 +524,8 @@ public class FirstPersonDrawer {
 			// debug
 			//System.out.println("polygon-x: " + xps[0] + ", " + xps[1] + ", " + xps[2] + ", " + xps[3]) ;
 			//System.out.println("polygon-y: " + yps[0] + ", " + yps[1] + ", " + yps[2] + ", " + yps[3]) ;
-			gc.fillPolygon(xps, yps, 4);
+
+			MazePanel.fillPolygon(xps, yps, 4);
 			// for debugging purposes, code will draw a red line around polygon
 			// this makes individual segments visible
 			/*
