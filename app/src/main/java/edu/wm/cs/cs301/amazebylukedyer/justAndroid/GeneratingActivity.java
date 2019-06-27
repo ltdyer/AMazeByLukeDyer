@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.wm.cs.cs301.amazebylukedyer.R;
+import edu.wm.cs.cs301.amazebylukedyer.generation.MazeConfiguration;
+import edu.wm.cs.cs301.amazebylukedyer.generation.MazeFactory;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Order;
+import edu.wm.cs.cs301.amazebylukedyer.gui.Controller;
+import edu.wm.cs.cs301.amazebylukedyer.gui.DataHolder;
+import edu.wm.cs.cs301.amazebylukedyer.gui.MazePanel;
+
+import static edu.wm.cs.cs301.amazebylukedyer.generation.Order.Builder.DFS;
 
 public class GeneratingActivity extends AppCompatActivity {
 
@@ -35,6 +44,14 @@ public class GeneratingActivity extends AppCompatActivity {
     String skillLevel;
     String generationAlgo;
     String operationMode;
+
+    public static Handler progressHandler;
+    public DataHolder dh;
+    public static MazeConfiguration mazeConfig;
+    public static Controller controller;
+    public static MazePanel mp;
+    MazeFactory mazefactory;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +86,65 @@ public class GeneratingActivity extends AppCompatActivity {
         progressBarString = (TextView) findViewById(R.id.Generating_maze_string);
 
 
+        controller = new Controller();
+        mazeConfig = controller.getMazeConfiguration();
+        if (operationMode.equals("Manual")) {
+
+            intent = new Intent(this, PlayAnimationActivity.class);
+
+            intent.putExtra(AMazeActivity.GENERATIONALGO, generationAlgo);
+            intent.putExtra(AMazeActivity.SKILLLEVEL, skillLevel);
+            intent.putExtra(AMazeActivity.OPERATIONMODE, operationMode);
+
+            setMaze(skillLevel, generationAlgo, operationMode);
+        }
+        else if (operationMode.equals("WallFollower") || operationMode.equals("Wizard")) {
+
+            intent = new Intent(this, PlayAnimationActivity.class);
+
+            intent.putExtra(AMazeActivity.GENERATIONALGO, generationAlgo);
+            intent.putExtra(AMazeActivity.SKILLLEVEL, skillLevel);
+            intent.putExtra(AMazeActivity.OPERATIONMODE, operationMode);
+
+            setMaze(skillLevel, generationAlgo, operationMode);
+        }
 
     }
+
+    private void setMaze(String skillLevel, String generationAlgo, String operationMode) {
+        setSkillLevel(skillLevel);
+        setGenerationAlgo(generationAlgo);
+        setOperationMode(operationMode);
+
+        controller.setPerfect(false);
+
+    }
+
+    private void setOperationMode(String operationMode) {
+        if (operationMode.equals("Manual")) {
+            //set manual
+        }
+        else if(operationMode.equals("WallFollower") || operationMode.equals("Wizard")) {
+            //set Wallfollower
+        }
+    }
+
+    private void setGenerationAlgo(String generationAlgo) {
+        if (generationAlgo.equals("Default")) {
+            controller.setBuilder(Order.Builder.DFS);
+        }
+        else if (generationAlgo.equals("Kruskal")) {
+            controller.setBuilder(Order.Builder.Kruskal);
+        }
+        else if (generationAlgo.equals("Prim")) {
+            controller.setBuilder(Order.Builder.Prim);
+        }
+    }
+
+    private void setSkillLevel(String skillLevel) {
+
+    }
+
 
 
     /**

@@ -1,10 +1,10 @@
 package edu.wm.cs.cs301.amazebylukedyer.gui;
 
-import gui.Constants.UserInput;
-import generation.CardinalDirection;
-import generation.MazeConfiguration;
-import generation.Order;
-import generation.Order.Builder;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Order;
+import edu.wm.cs.cs301.amazebylukedyer.generation.CardinalDirection;
+import edu.wm.cs.cs301.amazebylukedyer.generation.MazeConfiguration;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Order.Builder;
+import edu.wm.cs.cs301.amazebylukedyer.gui.Constants.UserInput;
 
 
 /**
