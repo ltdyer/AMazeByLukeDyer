@@ -79,6 +79,11 @@ public class FirstPersonDrawer {
 	Bitmap bitmap;
 
 	/**
+	 * Maze Panel
+	 */
+	MazePanel mp;
+
+	/**
 	 * view variables, calculated based on the x and y position of the player
 	 */
 	private int viewDirectionX;
@@ -162,8 +167,9 @@ public class FirstPersonDrawer {
 	 * @param offset, value used to calculate the views
 	 * @param rangeSet
 	 */
-	public void draw(int x, int y, int viewDirectionX, int viewDirectionY, int ang, int walkStep, int offset, RangeSet rangeSet) {
+	public void draw(MazePanel mp, int x, int y, int viewDirectionX, int viewDirectionY, int ang, int walkStep, int offset, RangeSet rangeSet) {
 
+		this.mp = mp;
 		this.angle = ang;
 		this.viewDirectionX = viewDirectionX;
 		this.viewDirectionY = viewDirectionY;
@@ -176,14 +182,14 @@ public class FirstPersonDrawer {
 		yView = (mapUnit*y+mapUnit/2) + unscaleViewD(viewDirectionY*(stepSize*walkStep-offset));
 
 		//draw background
-		drawBackground(canvas);
+		drawBackground(mp);
 
 		//prime new paint to draw visible sectors
 		Paint paint = new Paint();
 		paint.setStyle(Paint.Style.FILL);
 
 		//draw what can be seen from this view at this position
-		paint.setColor(Color.WHITE);
+		mp.setColor(Color.WHITE);
 		rSet.set(0, viewWidth-1);
 		drawAllVisibleSectors(bspRoot);
 
@@ -216,20 +222,20 @@ public class FirstPersonDrawer {
 	/**
 	 * Draws a black and a grey rectangle to provide a background.
 	 * Note that this also erases previous drawings of maze or map.
-	 * @param canvas to draw on, must be not null
+	 * @param mp to draw on, must be not null
 	 */
-	private void drawBackground(Canvas canvas) {
+	private void drawBackground(MazePanel mp) {
 		//make a new Paint
 		Paint paint = new Paint();
 		paint.setStyle(Paint.Style.FILL);
 
 		// black rectangle in upper half of screen
-		paint.setColor(Color.BLACK);
-		canvas.drawRect(0, 0, viewWidth, viewHeight/2, paint);
+		mp.setColor(Color.BLACK);
+		mp.fillRect(0, 0, viewWidth, viewHeight/2);
 
 		// grey rectangle in lower half of screen
-		paint.setColor(Color.GRAY);
-		canvas.drawRect(0, viewHeight/2, viewWidth, viewHeight, paint);
+		mp.setColor(Color.GRAY);
+		mp.fillRect(0, viewHeight/2, viewWidth, viewHeight);
 	}
 	/**
 	 * Recursive method to explore tree of BSP nodes and draw all segments in leaf nodes 
@@ -443,7 +449,7 @@ public class FirstPersonDrawer {
 		// moved code for drawing bits and pieces into yet another method to 
 		// gain more clarity on what information is actually needed
 		Paint paint = new Paint();
-		paint.setColor(seg.getColor());
+		mp.setColor(seg.getColor());
 		paint.setStyle(Paint.Style.FILL);
 		boolean drawn = drawSegmentPolygons(x1, x2, y11, y12, y21, y22);
 		
@@ -525,7 +531,7 @@ public class FirstPersonDrawer {
 			//System.out.println("polygon-x: " + xps[0] + ", " + xps[1] + ", " + xps[2] + ", " + xps[3]) ;
 			//System.out.println("polygon-y: " + yps[0] + ", " + yps[1] + ", " + yps[2] + ", " + yps[3]) ;
 
-			MazePanel.fillPolygon(xps, yps, 4);
+			mp.fillPolygon(xps, yps, 4);
 			// for debugging purposes, code will draw a red line around polygon
 			// this makes individual segments visible
 			/*

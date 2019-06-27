@@ -1,12 +1,14 @@
 package edu.wm.cs.cs301.amazebylukedyer.generation;
 
-import java.awt.Color;
-import java.util.ArrayList;
+import android.graphics.Color;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import gui.MazeFileWriter;
+import java.util.ArrayList;
+
+import edu.wm.cs.cs301.amazebylukedyer.gui.MazeFileWriter;
+import edu.wm.cs.cs301.amazebylukedyer.gui.MazePanel;
 
 /**
  * A segment is a continuous sequence of walls in the maze.
@@ -59,7 +61,7 @@ public class Seg {
     /**
      * color of segment, only set by constructor and file reader.
      */
-    private Color col;
+    private int col;
     /**
      * partition flag.
      */
@@ -140,15 +142,16 @@ public class Seg {
      *            obscure
      */
     private void initColor(final int distance, final int cc) {
+
         final int d = distance / 4;
         // mod used to limit the number of colors to 6
         final int rgbValue = calculateRGBValue(d);
         switch (((d >> 3) ^ cc) % 6) {
         case 0:
-            setColor(new Color(rgbValue, RGB_DEF, RGB_DEF));
+            setColor(getColorEncoding(rgbValue, RGB_DEF, RGB_DEF));
             break;
         case 1:
-            setColor(new Color(RGB_DEF, rgbValue, RGB_DEF));
+            setColor(col.getColorEncoding(RGB_DEF, rgbValue, RGB_DEF));
             break;
         case 2:
             setColor(new Color(RGB_DEF, RGB_DEF, rgbValue));
@@ -242,24 +245,15 @@ public class Seg {
      * @param i
      *            id for this element
      */
-    public void storeSeg(final Document doc, final Element mazeXML,
-            final int number, final int i) {
-        MazeFileWriter.appendChild(doc, mazeXML, "distSeg_" + number + "_" + i,
-                dist);
-        MazeFileWriter.appendChild(doc, mazeXML, "dxSeg_" + number + "_" + i,
-                getExtensionX());
-        MazeFileWriter.appendChild(doc, mazeXML, "dySeg_" + number + "_" + i,
-                getExtensionY());
-        MazeFileWriter.appendChild(doc, mazeXML,
-                "partitionSeg_" + number + "_" + i, isPartition());
-        MazeFileWriter.appendChild(doc, mazeXML, "seenSeg_" + number + "_" + i,
-                isSeen());
-        MazeFileWriter.appendChild(doc, mazeXML, "xSeg_" + number + "_" + i,
-                getStartPositionX());
-        MazeFileWriter.appendChild(doc, mazeXML, "ySeg_" + number + "_" + i,
-                getStartPositionY());
-        MazeFileWriter.appendChild(doc, mazeXML, "colSeg_" + number + "_" + i,
-                getColor().getRGB());
+    public void storeSeg(final Document doc, final Element mazeXML, final int number, final int i) {
+        MazeFileWriter.appendChild(doc, mazeXML, "distSeg_" + number + "_" + i, dist);
+        MazeFileWriter.appendChild(doc, mazeXML, "dxSeg_" + number + "_" + i, getExtensionX());
+        MazeFileWriter.appendChild(doc, mazeXML, "dySeg_" + number + "_" + i, getExtensionY());
+        MazeFileWriter.appendChild(doc, mazeXML, "partitionSeg_" + number + "_" + i, isPartition());
+        MazeFileWriter.appendChild(doc, mazeXML, "seenSeg_" + number + "_" + i, isSeen());
+        MazeFileWriter.appendChild(doc, mazeXML, "xSeg_" + number + "_" + i, getStartPositionX());
+        MazeFileWriter.appendChild(doc, mazeXML, "ySeg_" + number + "_" + i, getStartPositionY());
+        MazeFileWriter.appendChild(doc, mazeXML, "colSeg_" + number + "_" + i, getColor());
     }
 
     /**
@@ -288,8 +282,7 @@ public class Seg {
         if ((x != o.x) || (dx != o.dx) || (y != o.y) || (dy != o.dy)) {
             return false;
         }
-        if ((dist != o.dist) || (partition != o.partition) || (seen != o.seen)
-                || (col.getRGB() != o.col.getRGB())) {
+        if ((dist != o.dist) || (partition != o.partition) || (seen != o.seen) || (col != o.col)) {
             return false;
         }
         // all fields are equal, so both objects are equal
@@ -369,7 +362,7 @@ public class Seg {
      * @param color
      *            the color to set
      */
-    public void setColor(final Color color) {
+    public void setColor(int color) {
         /*
          * for debugging: use random color settings such that all segments look
          * different
