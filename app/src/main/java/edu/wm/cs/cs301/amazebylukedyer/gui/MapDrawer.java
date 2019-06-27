@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.provider.ContactsContract;
 
 import edu.wm.cs.cs301.amazebylukedyer.generation.CardinalDirection;
 import edu.wm.cs.cs301.amazebylukedyer.generation.Cells;
@@ -166,7 +167,7 @@ public class MapDrawer {
 
 		Paint paint = new Paint();
 		paint.setColor(Color.WHITE);
-		//Bitmap bitmap =
+		Bitmap bitmap = DataHolder.getInstance().getBitmap();
 		Canvas canvas = new Canvas(bitmap);
 
 		

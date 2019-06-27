@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import edu.wm.cs.cs301.amazebylukedyer.gui.MazeFileWriter;
 import edu.wm.cs.cs301.amazebylukedyer.gui.MazePanel;
 
+import static edu.wm.cs.cs301.amazebylukedyer.gui.MazePanel.getColorEncoding;
+
 /**
  * A segment is a continuous sequence of walls in the maze.
  *
@@ -72,6 +74,8 @@ public class Seg {
      */
     private boolean seen;
 
+
+    MazePanel mp;
     /**
      * Constructor assigns parameter values to instance variables.
      *
@@ -148,25 +152,32 @@ public class Seg {
         final int rgbValue = calculateRGBValue(d);
         switch (((d >> 3) ^ cc) % 6) {
         case 0:
-            setColor(getColorEncoding(rgbValue, RGB_DEF, RGB_DEF));
+
+            mp.setColor(getColorEncoding(rgbValue, RGB_DEF, RGB_DEF));
             break;
         case 1:
-            setColor(col.getColorEncoding(RGB_DEF, rgbValue, RGB_DEF));
+            mp.setColor(getColorEncoding(RGB_DEF, rgbValue, RGB_DEF));
+            //setColor(col.getColorEncoding(RGB_DEF, rgbValue, RGB_DEF));
             break;
         case 2:
-            setColor(new Color(RGB_DEF, RGB_DEF, rgbValue));
+            mp.setColor(getColorEncoding(RGB_DEF, RGB_DEF, rgbValue));
+            //setColor(new Color(RGB_DEF, RGB_DEF, rgbValue));
             break;
         case 3:
-            setColor(new Color(rgbValue, rgbValue, RGB_DEF));
+            mp.setColor(getColorEncoding(rgbValue, rgbValue, RGB_DEF));
+            //setColor(new Color(rgbValue, rgbValue, RGB_DEF));
             break;
         case 4:
-            setColor(new Color(RGB_DEF, rgbValue, rgbValue));
+            mp.setColor(getColorEncoding(RGB_DEF, rgbValue, rgbValue));
+            //setColor(new Color(RGB_DEF, rgbValue, rgbValue));
             break;
         case 5:
-            setColor(new Color(rgbValue, RGB_DEF, rgbValue));
+            mp.setColor(getColorEncoding(rgbValue, RGB_DEF, rgbValue));
+            //setColor(new Color(rgbValue, RGB_DEF, rgbValue));
             break;
         default:
-            setColor(new Color(RGB_DEF, RGB_DEF, RGB_DEF));
+            mp.setColor(getColorEncoding(RGB_DEF, RGB_DEF, RGB_DEF));
+            //setColor(new Color(RGB_DEF, RGB_DEF, RGB_DEF));
             break;
         }
     }
