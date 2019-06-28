@@ -22,12 +22,6 @@ public class DataHolder {
         return bitmap;
     }
 
-//    public void setController(Controller con) {
-//        this.controller = con;
-//    }
-//    public Controller getController() {
-//        return controller;
-//    }
 
     public void setMazeConfiguration(MazeConfiguration mazConfig) { this.mc = mazConfig;}
     public MazeConfiguration getMazeConfiguration() { return mc; }

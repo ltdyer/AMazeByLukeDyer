@@ -1,5 +1,8 @@
 package edu.wm.cs.cs301.amazebylukedyer.gui;
 
+import edu.wm.cs.cs301.amazebylukedyer.generation.CardinalDirection;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Cells;
+import edu.wm.cs.cs301.amazebylukedyer.generation.MazeConfiguration;
 import gui.Constants.UserInput;
 import generation.CardinalDirection;
 import generation.Cells;

@@ -160,26 +160,22 @@ public class FirstPersonDrawer {
 	 * Draws the first person view on the screen during the game
 	 * @param x coordinate of current position, only used to set viewX
 	 * @param y coordinate of current position, only used to set viewY
-	 * @param viewDirectionX the directional view, x component
-	 * @param viewDirectionY the directional view, y component
 	 * @param ang gives the current viewing angle
 	 * @param walkStep, only used to set viewX and viewY
-	 * @param offset, value used to calculate the views
-	 * @param rangeSet
 	 */
-	public void draw(MazePanel mp, int x, int y, int viewDirectionX, int viewDirectionY, int ang, int walkStep, int offset, RangeSet rangeSet) {
+	public void draw(MazePanel mp, int x, int y, int walkStep, int ang) {
 
 		this.mp = mp;
 		this.angle = ang;
-		this.viewDirectionX = viewDirectionX;
-		this.viewDirectionY = viewDirectionY;
-		this.rSet = rangeSet;
+
 		//find out how to do bitmap
+
 		canvas = new Canvas(bitmap);
 
 		//obtain view using predefined variables
-		xView = (mapUnit*x+mapUnit/2) + unscaleViewD(viewDirectionX*(stepSize*walkStep-offset));
-		yView = (mapUnit*y+mapUnit/2) + unscaleViewD(viewDirectionY*(stepSize*walkStep-offset));
+		setView(x, y, walkStep);
+		//xView = (mapUnit*x+mapUnit/2) + unscaleViewD(viewDirectionX*(stepSize*walkStep-offset));
+		//yView = (mapUnit*y+mapUnit/2) + unscaleViewD(viewDirectionY*(stepSize*walkStep-offset));
 
 		//draw background
 		drawBackground(mp);

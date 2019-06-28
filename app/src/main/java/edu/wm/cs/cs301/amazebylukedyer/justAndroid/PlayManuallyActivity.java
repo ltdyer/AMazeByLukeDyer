@@ -11,8 +11,15 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import edu.wm.cs.cs301.amazebylukedyer.R;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Cells;
+import edu.wm.cs.cs301.amazebylukedyer.generation.MazeConfiguration;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Seg;
+import edu.wm.cs.cs301.amazebylukedyer.gui.Constants;
 import edu.wm.cs.cs301.amazebylukedyer.gui.Controller;
 import edu.wm.cs.cs301.amazebylukedyer.gui.DataHolder;
+import edu.wm.cs.cs301.amazebylukedyer.gui.FirstPersonDrawer;
+import edu.wm.cs.cs301.amazebylukedyer.gui.MapDrawer;
+import edu.wm.cs.cs301.amazebylukedyer.gui.MazePanel;
 
 import static edu.wm.cs.cs301.amazebylukedyer.justAndroid.GeneratingActivity.controller;
 
@@ -21,8 +28,11 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private Button showWallsButton;
     private Button showFullMazeButton;
     private Button showSolutionButton;
+    private boolean showWalls;
+    private boolean showFullMaze;
+    private boolean showSolution;
 
-     Button forwardButton;
+    private Button forwardButton;
     private Button backwardButton;
     private Button leftButton;
     private Button rightButton;
@@ -31,11 +41,28 @@ public class PlayManuallyActivity extends AppCompatActivity {
 
     private int pathLength;
 
+    MazeConfiguration mazeConfig;
+    DataHolder dh;
+    MazePanel mazePanel;
+
+    FirstPersonDrawer firstPersonDrawer;
+    MapDrawer mapDrawer;
+    Seg seg;
+
     String skillLevel;
     String generationAlgo;
     String operationMode;
 
-    public boolean visited = false;
+    public boolean started = false;
+
+    int angle;
+    int walkStep;
+    Cells seenCells;
+
+    int px; //position x
+    int py; //position y
+    int dx; //direction x
+    int dy; //direction y
 
     final public static String PATHLENGTH = "PATHLENGTH";
     final public static String MANUAL = "MANUAL";
@@ -51,7 +78,9 @@ public class PlayManuallyActivity extends AppCompatActivity {
         //INTERACTS WITH STATEPLAYING
         //NO CONTROLLER
 
-        visited = true;
+        started = true;
+
+        mazeConfig = dh.getInstance().getMazeConfiguration();
 
         Bundle generatingActivityIntent = getIntent().getExtras();
 
@@ -63,7 +92,6 @@ public class PlayManuallyActivity extends AppCompatActivity {
         generationAlgo = generatingActivityIntent.getString(AMazeActivity.GENERATIONALGO);
         operationMode = generatingActivityIntent.getString(AMazeActivity.OPERATIONMODE);
 
-        final Controller controller = DataHolder.getInstance().getController();
 
         Log.v("skill level: ", ""+skillLevel);
         Log.v("algorithm: ", ""+generationAlgo);
@@ -90,14 +118,88 @@ public class PlayManuallyActivity extends AppCompatActivity {
         backwardButton = (Button) findViewById(R.id.down_button);
         leftButton = (Button) findViewById(R.id.left_button);
         rightButton = (Button) findViewById(R.id.right_button);
-
         skipButton = (Button) findViewById(R.id.skip_button);
 
         pathLength = 0;
 
 
+        //Note: MazeConfig is now the entity that contains the numerical information regarding the width, height, size, etc of the maze that we got from generation
+        //We will need that to maybe access those kinds of variables
+        start(mazePanel);
+
     }
 
+
+    public void start(MazePanel mazePanel) {
+        started = true;
+
+        this.mazePanel = mazePanel;
+        showWalls = false;
+        showFullMaze = false;
+        showSolution = false;
+
+        seenCells = new Cells(mazeConfig.getWidth()+1, mazeConfig.getHeight()+1);
+
+        setPositionDirectionViewingDirection();
+
+        walkStep = 0;
+        startDrawing();
+
+
+    }
+
+    public void startDrawing() {
+        firstPersonDrawer = new FirstPersonDrawer(Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT, Constants.MAP_UNIT, Constants.STEP_SIZE, seenCells, mazeConfig.getRootnode());
+        mapDrawer = new MapDrawer(seenCells, 15, mazeConfig);
+        draw();
+    }
+
+
+    public void setPositionDirectionViewingDirection() {
+        int start[] = mazeConfig.getStartingPosition();
+        setCurrentPosition(start[0], start[1]);
+        angle = 0;
+        setDirectionToMatchCurrentAngle();
+
+    }
+
+
+    public void setCurrentPosition(int x, int y) {
+        px = x;
+        py = y;
+    }
+    private void setCurrentDirection(int x, int y) {
+        dx = x ;
+        dy = y ;
+    }
+
+    public void setDirectionToMatchCurrentAngle() {
+        setCurrentDirection((int) Math.cos(radify(angle)), (int) Math.sin(radify(angle))) ;
+    }
+
+    final double radify(int x) {
+
+        return x*Math.PI/180;
+    }
+
+    public void draw() {
+        firstPersonDrawer.draw(mazePanel, px, py, walkStep, angle);
+        if (isInShowWallsMode()) {
+            mapDrawer.draw(mazePanel, px, py, angle, walkStep, isInShowFullMazeMode(), isInShowSolutionMode());
+        }
+        mazePanel.update();
+    }
+
+
+    boolean isInShowWallsMode() {
+        return showWalls;
+    }
+    boolean isInShowFullMazeMode() {
+        return showFullMaze;
+    }
+    boolean isInShowSolutionMode() {
+        return showSolution;
+    }
     /**
      * the following four methods are directional input methods
      * @param view
