@@ -1,5 +1,6 @@
 package edu.wm.cs.cs301.amazebylukedyer.generation;
 
+import edu.wm.cs.cs301.amazebylukedyer.gui.MazePanel;
 import generation.Factory;
 import generation.Order;
 
@@ -22,6 +23,7 @@ public class MazeFactory implements Factory {
 	private MazeBuilder builder;
 	// 
 	private Thread buildThread; // computations are performed in own separated thread with this.run()
+
 	
 	//////////////////////// Constructor ////////////////////////////////////////
 	/**

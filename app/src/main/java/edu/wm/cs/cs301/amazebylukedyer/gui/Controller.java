@@ -114,6 +114,18 @@ public class Controller {
         currentState.start(this, panel);
         fileName = null; // reset after use
     }
+
+
+    public void setMaze(String driver, String algorithm, String skill) {
+
+    }
+
+
+
+
+
+
+
     /**
      * Switches the controller to the generating screen.
      * Assumes that builder and perfect fields are already set

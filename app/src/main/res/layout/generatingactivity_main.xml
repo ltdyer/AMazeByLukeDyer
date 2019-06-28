@@ -11,20 +11,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/generating_activity_string"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <ProgressBar
         android:id="@+id/Generating_maze_progress"
         android:layout_width="398dp"
         android:layout_height="120dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Generating_maze_string" />
-        <!--style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        app:layout_constraintTop_toTopOf="@+id/Generating_maze_string"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:max="100"
         android:progress="0"
         android:progressDrawable="@drawable/customprogressbar"
@@ -32,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Generating_maze_string"--> />
+        app:layout_constraintTop_toBottomOf="@+id/Generating_maze_string" />
 
     <Button
         android:id="@+id/start_button_manual"

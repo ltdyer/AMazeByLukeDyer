@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import edu.wm.cs.cs301.amazebylukedyer.R;
+import edu.wm.cs.cs301.amazebylukedyer.gui.Controller;
+import edu.wm.cs.cs301.amazebylukedyer.gui.DataHolder;
+
+import static edu.wm.cs.cs301.amazebylukedyer.justAndroid.GeneratingActivity.controller;
 
 public class PlayManuallyActivity extends AppCompatActivity {
 
@@ -18,7 +22,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private Button showFullMazeButton;
     private Button showSolutionButton;
 
-    private Button forwardButton;
+     Button forwardButton;
     private Button backwardButton;
     private Button leftButton;
     private Button rightButton;
@@ -38,10 +42,14 @@ public class PlayManuallyActivity extends AppCompatActivity {
     final public static String ROBOT = null;
     final public static String RESULT = "RESULT";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.playmanuallyactivity_main);
+
+        //INTERACTS WITH STATEPLAYING
+        //NO CONTROLLER
 
         visited = true;
 
@@ -55,7 +63,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
         generationAlgo = generatingActivityIntent.getString(AMazeActivity.GENERATIONALGO);
         operationMode = generatingActivityIntent.getString(AMazeActivity.OPERATIONMODE);
 
-
+        final Controller controller = DataHolder.getInstance().getController();
 
         Log.v("skill level: ", ""+skillLevel);
         Log.v("algorithm: ", ""+generationAlgo);
@@ -66,6 +74,19 @@ public class PlayManuallyActivity extends AppCompatActivity {
         showSolutionButton = (Button) findViewById(R.id.Show_solution_button);
 
         forwardButton = (Button) findViewById(R.id.up_button);
+//        forwardButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.v("Up", "Moved forward");
+//                controller.keyDown()
+//
+//            }
+//        });
+
+
+
+
+
         backwardButton = (Button) findViewById(R.id.down_button);
         leftButton = (Button) findViewById(R.id.left_button);
         rightButton = (Button) findViewById(R.id.right_button);
@@ -81,6 +102,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
      * the following four methods are directional input methods
      * @param view
      */
+
     public void forwardClick(View view) {
         Toast.makeText(getBaseContext(), "Up!", Toast.LENGTH_SHORT).show();
         Log.v("movement: ", "forward");
