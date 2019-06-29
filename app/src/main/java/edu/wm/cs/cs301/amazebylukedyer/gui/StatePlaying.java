@@ -3,10 +3,7 @@ package edu.wm.cs.cs301.amazebylukedyer.gui;
 import edu.wm.cs.cs301.amazebylukedyer.generation.CardinalDirection;
 import edu.wm.cs.cs301.amazebylukedyer.generation.Cells;
 import edu.wm.cs.cs301.amazebylukedyer.generation.MazeConfiguration;
-import gui.Constants.UserInput;
-import generation.CardinalDirection;
-import generation.Cells;
-import generation.MazeConfiguration;
+import edu.wm.cs.cs301.amazebylukedyer.justAndroid.PlayManuallyActivity;
 
 
 /**
@@ -39,7 +36,10 @@ public class StatePlaying extends DefaultState {
     MazePanel panel;
     Controller control;
     
-    MazeConfiguration mazeConfig ; 
+    MazeConfiguration mazeConfig ;
+    DataHolder dataHolder;
+
+    PlayManuallyActivity pma;
     
     private boolean showMaze;           // toggle switch to show overall maze on screen
     private boolean showSolution;       // toggle switch to show solution in overall maze on screen
@@ -66,74 +66,112 @@ public class StatePlaying extends DefaultState {
     public StatePlaying() {
         started = false;
     }
-    @Override
-    public void setMazeConfiguration(MazeConfiguration config) {
-        mazeConfig = config;
-    }
+//    @Override
+//    public void setMazeConfiguration(MazeConfiguration config) {
+//        mazeConfig = config;
+//    }
+
     /**
      * Start the actual game play by showing the playing screen.
      * If the panel is null, all drawing operations are skipped.
      * This mode of operation is useful for testing purposes, 
      * i.e., a dryrun of the game without the graphics part.
-     * @param controller provides access to the controller this state resides in
-     * @param panel is part of the UI and visible on the screen, needed for drawing
+
      */
-    public void start(Controller controller, MazePanel panel) {
+
+//    public void start(Controller controller, MazePanel panel) {
+//        started = true;
+//        // keep the reference to the controller to be able to call method to switch the state
+//        control = controller;
+//        // keep the reference to the panel for drawing
+//        this.panel = panel;
+//        //
+//        // adjust internal state of maze model
+//        // visibility settings
+//        showMaze = false ;
+//        showSolution = false ;
+//        mapMode = false;
+//        // init data structure for visible walls
+//        seenCells = new Cells(mazeConfig.getWidth()+1,mazeConfig.getHeight()+1) ;
+//        // set the current position and direction consistently with the viewing direction
+//        setPositionDirectionViewingDirection();
+//        walkStep = 0; // counts incremental steps during move/rotate operation
+//
+//        if (panel != null) {
+//        	startDrawer();
+//        }
+//        else {
+//        	// else: dry-run without graphics, most likely for testing purposes
+//        	printWarning();
+//        }
+//    }
+    public void start(MazePanel mazePanel) {
         started = true;
-        // keep the reference to the controller to be able to call method to switch the state
-        control = controller;
-        // keep the reference to the panel for drawing
-        this.panel = panel;
-        //
-        // adjust internal state of maze model
-        // visibility settings
-        showMaze = false ;
-        showSolution = false ;
+
+        this.panel = mazePanel;
+        showMaze = false;
         mapMode = false;
-        // init data structure for visible walls
-        seenCells = new Cells(mazeConfig.getWidth()+1,mazeConfig.getHeight()+1) ;
-        // set the current position and direction consistently with the viewing direction
+        showSolution = false;
+
+        mazeConfig = dataHolder.getInstance().getMazeConfiguration();
+        seenCells = new Cells(mazeConfig.getWidth()+1, mazeConfig.getHeight()+1);
+
         setPositionDirectionViewingDirection();
-        walkStep = 0; // counts incremental steps during move/rotate operation
-    
-        if (panel != null) {
-        	startDrawer();
-        }
-        else {
-        	// else: dry-run without graphics, most likely for testing purposes
-        	printWarning();
-        }
+
+        walkStep = 0;
+        startDrawer();
+
+
     }
+
+
     /**
+     *
      * Initializes the drawer for the first person view
      * and the map view and then draws the initial screen
      * for this state.
      */
-	protected void startDrawer() {
-		firstPersonView = new FirstPersonDrawer(Constants.VIEW_WIDTH,
-				Constants.VIEW_HEIGHT, Constants.MAP_UNIT,
-				Constants.STEP_SIZE, seenCells, mazeConfig.getRootnode()) ;
-		mapView = new MapDrawer(seenCells, 15, mazeConfig) ;
-		// draw the initial screen for this state
-		draw();
-	}
+//	protected void startDrawer() {
+//		firstPersonView = new FirstPersonDrawer(Constants.VIEW_WIDTH,
+//				Constants.VIEW_HEIGHT, Constants.MAP_UNIT,
+//				Constants.STEP_SIZE, seenCells, mazeConfig.getRootnode()) ;
+//		mapView = new MapDrawer(seenCells, 15, mazeConfig) ;
+//		// draw the initial screen for this state
+//		draw();
+//	}
+    public void startDrawer() {
+        firstPersonView = new FirstPersonDrawer(Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT, Constants.MAP_UNIT, Constants.STEP_SIZE, seenCells, mazeConfig.getRootnode());
+        mapView = new MapDrawer(seenCells, 15, mazeConfig);
+        draw();
+    }
+
+
     /**
      * Internal method to set the current position, the direction
      * and the viewing direction to values consistent with the 
      * given maze.
      */
-	private void setPositionDirectionViewingDirection() {
-		// obtain starting position
-        int[] start = mazeConfig.getStartingPosition() ;
-        setCurrentPosition(start[0],start[1]) ;
-        // set current view direction and angle
-        angle = 0; // angle matches with east direction, 
-        // hidden consistency constraint!
+
+//	private void setPositionDirectionViewingDirection() {
+//		// obtain starting position
+//        int[] start = mazeConfig.getStartingPosition() ;
+//        setCurrentPosition(start[0],start[1]) ;
+//        // set current view direction and angle
+//        angle = 0; // angle matches with east direction,
+//        // hidden consistency constraint!
+//        setDirectionToMatchCurrentAngle();
+//        // initial direction is east, check this for sanity:
+//        assert(dx == 1);
+//        assert(dy == 0);
+//	}
+
+    public void setPositionDirectionViewingDirection() {
+        int start[] = mazeConfig.getStartingPosition();
+        setCurrentPosition(start[0], start[1]);
+        angle = 0;
         setDirectionToMatchCurrentAngle();
-        // initial direction is east, check this for sanity:
-        assert(dx == 1);
-        assert(dy == 0);
-	}
+
+    }
  
 
     /**
@@ -145,7 +183,7 @@ public class StatePlaying extends DefaultState {
      * @param value is not used, exists only for consistency across State classes
      * @return false if not started yet otherwise true
      */
-    public boolean keyDown(UserInput key, int value) {
+    public boolean keyDown(Constants.UserInput key, int value) {
         if (!started)
             return false;
 
@@ -162,7 +200,8 @@ public class StatePlaying extends DefaultState {
             
             // check termination, did we leave the maze?
             if (isOutside(px,py)) {
-                control.switchFromPlayingToWinning(0);
+                //control.switchFromPlayingToWinning(0);
+                //pma.changeToFinishActivity();
             }
             //System.out.println("Cardinal Direction after moving up is " + getCurrentDirection());
             break;
@@ -225,20 +264,29 @@ public class StatePlaying extends DefaultState {
     /**
      * Draws the current content on panel to show it on screen.
      */
-    protected void draw() {
-    	if (panel == null) {
-    		printWarning();
-    		return;
-    	}
-    	// draw the first person view and the map view if wanted
-    	firstPersonView.draw(panel, px, py, walkStep, angle) ;
+//    protected void draw() {
+//    	if (panel == null) {
+//    		printWarning();
+//    		return;
+//    	}
+//    	// draw the first person view and the map view if wanted
+//    	firstPersonView.draw(panel, px, py, walkStep, angle) ;
+//        if (isInMapMode()) {
+//			mapView.draw(panel, px, py, angle, walkStep,
+//					isInShowMazeMode(),isInShowSolutionMode()) ;
+//		}
+//		// update the screen with the buffer graphics
+//        panel.update() ;
+//    }
+    public void draw() {
+        firstPersonView.draw(panel, px, py, walkStep, angle);
         if (isInMapMode()) {
-			mapView.draw(panel, px, py, angle, walkStep,
-					isInShowMazeMode(),isInShowSolutionMode()) ;
-		}
-		// update the screen with the buffer graphics
-        panel.update() ;
+            mapView.draw(panel, px, py, angle, walkStep, isInShowMazeMode(), isInShowSolutionMode());
+        }
+        panel.update();
     }
+
+
     /**
      * Adjusts the internal map scale setting for the map view.
      * @param increment if true increase, otherwise decrease scale for map

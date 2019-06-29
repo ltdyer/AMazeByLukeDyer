@@ -15,13 +15,13 @@ import edu.wm.cs.cs301.amazebylukedyer.generation.Cells;
 import edu.wm.cs.cs301.amazebylukedyer.generation.MazeConfiguration;
 import edu.wm.cs.cs301.amazebylukedyer.generation.Seg;
 import edu.wm.cs.cs301.amazebylukedyer.gui.Constants;
-import edu.wm.cs.cs301.amazebylukedyer.gui.Controller;
 import edu.wm.cs.cs301.amazebylukedyer.gui.DataHolder;
 import edu.wm.cs.cs301.amazebylukedyer.gui.FirstPersonDrawer;
 import edu.wm.cs.cs301.amazebylukedyer.gui.MapDrawer;
 import edu.wm.cs.cs301.amazebylukedyer.gui.MazePanel;
+import edu.wm.cs.cs301.amazebylukedyer.gui.StatePlaying;
 
-import static edu.wm.cs.cs301.amazebylukedyer.justAndroid.GeneratingActivity.controller;
+
 
 public class PlayManuallyActivity extends AppCompatActivity {
 
@@ -63,6 +63,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     int py; //position y
     int dx; //direction x
     int dy; //direction y
+    StatePlaying statePlaying;
 
     final public static String PATHLENGTH = "PATHLENGTH";
     final public static String MANUAL = "MANUAL";
@@ -102,19 +103,6 @@ public class PlayManuallyActivity extends AppCompatActivity {
         showSolutionButton = (Button) findViewById(R.id.Show_solution_button);
 
         forwardButton = (Button) findViewById(R.id.up_button);
-//        forwardButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.v("Up", "Moved forward");
-//                controller.keyDown()
-//
-//            }
-//        });
-
-
-
-
-
         backwardButton = (Button) findViewById(R.id.down_button);
         leftButton = (Button) findViewById(R.id.left_button);
         rightButton = (Button) findViewById(R.id.right_button);
@@ -125,7 +113,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
 
         //Note: MazeConfig is now the entity that contains the numerical information regarding the width, height, size, etc of the maze that we got from generation
         //We will need that to maybe access those kinds of variables
-        start(mazePanel);
+        statePlaying.start(mazePanel);
 
     }
 
@@ -206,22 +194,27 @@ public class PlayManuallyActivity extends AppCompatActivity {
      */
 
     public void forwardClick(View view) {
+        statePlaying.keyDown(Constants.UserInput.Up, 1);
+        pathLength += 1;
         Toast.makeText(getBaseContext(), "Up!", Toast.LENGTH_SHORT).show();
         Log.v("movement: ", "forward");
     }
 
     public void downClick(View view) {
+        statePlaying.keyDown(Constants.UserInput.Down, 1);
         Toast.makeText(getBaseContext(), "Backwards!", Toast.LENGTH_SHORT).show();
         Log.v("movement: ", "backwards");
     }
 
 
     public void leftClick(View view) {
+        statePlaying.keyDown(Constants.UserInput.Left, 1);
         Toast.makeText(getBaseContext(), "Left!", Toast.LENGTH_SHORT).show();
         Log.v("movement: ", "left");
     }
 
     public void rightClick(View view) {
+        statePlaying.keyDown(Constants.UserInput.Right, 1);
         Toast.makeText(getBaseContext(), "Right!", Toast.LENGTH_SHORT).show();
         Log.v("movement: ", "right");
     }
@@ -232,16 +225,19 @@ public class PlayManuallyActivity extends AppCompatActivity {
      * @param view
      */
     public void showWalls(View view) {
+        statePlaying.keyDown(Constants.UserInput.ToggleLocalMap, 1);
         Toast.makeText(getBaseContext(), "If this wasn't a test, I would be showing WALLS", Toast.LENGTH_SHORT).show();
         Log.v("Showing: ", "walls");
     }
 
     public void showFullMaze(View view) {
+        statePlaying.keyDown(Constants.UserInput.ToggleFullMap, 1);
         Toast.makeText(getBaseContext(), "If this wasn't a test, I would be showing FULL MAZE", Toast.LENGTH_SHORT).show();
         Log.v("Showing: ", "full maze");
     }
 
     public void showSolution(View view) {
+        statePlaying.keyDown(Constants.UserInput.ToggleSolution, 1);
         Toast.makeText(getBaseContext(), "If this wasn't a test, I would be showing SOLUTION", Toast.LENGTH_SHORT).show();
         Log.v("Showing: ", "solution");
     }

@@ -1,10 +1,5 @@
 package edu.wm.cs.cs301.amazebylukedyer.generation;
 
-import edu.wm.cs.cs301.amazebylukedyer.gui.MazePanel;
-import generation.Factory;
-import generation.Order;
-
-
 /**
  * This class encapsulates how a maze is generated. 
  * It takes orders to produce a maze, delegates it to the matching maze builder 

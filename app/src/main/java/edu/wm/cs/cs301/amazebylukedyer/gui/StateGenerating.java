@@ -1,11 +1,12 @@
 package edu.wm.cs.cs301.amazebylukedyer.gui;
 
-import gui.Constants.UserInput;
-import generation.Cells;
-import generation.Factory;
-import generation.MazeConfiguration;
-import generation.MazeFactory;
-import generation.Order;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Order;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Cells;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Factory;
+import edu.wm.cs.cs301.amazebylukedyer.generation.MazeConfiguration;
+import edu.wm.cs.cs301.amazebylukedyer.generation.MazeFactory;
+import edu.wm.cs.cs301.amazebylukedyer.gui.Constants.UserInput;
+
 
 /**
  * Class handles the user interaction
@@ -39,7 +40,7 @@ public class StateGenerating extends DefaultState implements Order {
     
     // about the maze and its generation
     private int skillLevel; // user selected skill level, i.e. size of maze
-    private Builder builder; // selected maze generation algorithm
+    private Order.Builder builder; // selected maze generation algorithm
     private boolean perfect; // selected type of maze, i.e. 
     // perfect == true: no loops, i.e. no rooms
     // perfect == false: maze can support rooms
@@ -92,12 +93,12 @@ public class StateGenerating extends DefaultState implements Order {
      * Loads maze from file and returns a corresponding maze configuration.
      * @param filename, not null
      */
-    private MazeConfiguration loadMazeConfigurationFromFile(String filename) {
-        // load maze from file
-        MazeFileReader mfr = new MazeFileReader(filename) ;
-        // obtain MazeConfiguration
-        return mfr.getMazeConfiguration();
-    }
+//    private MazeConfiguration loadMazeConfigurationFromFile(String filename) {
+//        // load maze from file
+//        MazeFileReader mfr = new MazeFileReader(filename) ;
+//        // obtain MazeConfiguration
+//        return mfr.getMazeConfiguration();
+//    }
     /**
      * Start the maze generation.
      * @param controller needed to be able to switch states, not null
@@ -115,25 +116,25 @@ public class StateGenerating extends DefaultState implements Order {
         percentdone = 0;
         // if given a filename, load maze from file
         // otherwise, show view and order maze from factory
-        if (filename != null) {
-            // load maze from file
-            // push results into controller, imitating maze factory delivery
-            deliver(loadMazeConfigurationFromFile(filename));
-            // reset filename, next round will be generated again
-            filename = null;  
-        } else {
-            // common case: generate maze with some algorithm
-            assert null != factory : "MazeController.init: factory must be present";
-            // draw the initial screen
-            draw();
-            // make maze factory produce a maze 
-            // operates with background thread
-            // method returns immediately, 
-            // maze will be delivered later by calling this.deliver method
-            // this object implements Order, so it carries the spec for the maze
-            // to be generated
-            factory.order(this) ;
-        }
+//        if (filename != null) {
+//            // load maze from file
+//            // push results into controller, imitating maze factory delivery
+//            deliver(loadMazeConfigurationFromFile(filename));
+//            // reset filename, next round will be generated again
+//            filename = null;
+
+        // common case: generate maze with some algorithm
+        assert null != factory : "MazeController.init: factory must be present";
+        // draw the initial screen
+        draw();
+        // make maze factory produce a maze
+        // operates with background thread
+        // method returns immediately,
+        // maze will be delivered later by calling this.deliver method
+        // this object implements Order, so it carries the spec for the maze
+        // to be generated
+        factory.order(this) ;
+
     }
     
     /**

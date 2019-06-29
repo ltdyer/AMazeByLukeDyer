@@ -2,6 +2,7 @@ package edu.wm.cs.cs301.amazebylukedyer.justAndroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -202,6 +203,11 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
     }
 
     @Override
+    public void setBuilder(Builder builder) {
+
+    }
+
+    @Override
     public void deliver(MazeConfiguration mazeConfig) {
         //I'm thinking we wont do anything with operation in here, maybe thats for next screen
 
@@ -213,12 +219,20 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
 
     }
 
+    @SuppressLint("HandlerLeak")
     @Override
     public void updateProgress(int percentage) {
-        if (this.percentdone < percentage && percentage <= 100) {
-            this.percentdone = percentage;
-            progressBar.setProgress(this.percentdone);
-        }
+        progressHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if (msg.what < 100) {
+                    progressBar.setProgress(msg.what);
+                    progressBarString.setText("Progress: " + msg.what);
+                }
+            }
+        };
+
     }
 
     /**

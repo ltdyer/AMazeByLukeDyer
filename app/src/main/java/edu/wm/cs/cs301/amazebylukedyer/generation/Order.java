@@ -31,7 +31,10 @@ public interface Order {
 	 * there are no rooms as rooms can imply loops
 	 */
 	boolean isPerfect() ;
-	/**
+
+    void setBuilder(Builder builder);
+
+    /**
 	 * Delivers the produced maze. 
 	 * This method is called by the factory to provide the 
 	 * resulting maze as a MazeConfiguration.
