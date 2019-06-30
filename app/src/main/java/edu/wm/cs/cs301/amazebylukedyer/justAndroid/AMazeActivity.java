@@ -1,7 +1,5 @@
 package edu.wm.cs.cs301.amazebylukedyer.justAndroid;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +12,8 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -65,7 +65,7 @@ public class AMazeActivity extends AppCompatActivity implements AdapterView.OnIt
 
         selectSkillBar = (SeekBar) findViewById(R.id.select_skill_bar);
         selectSkillBar.setMax(9);
-        revisitButton = (Button) findViewById(R.id.Revisit_button);
+        //revisitButton = (Button) findViewById(R.id.Revisit_button);
         exploreButton = (Button) findViewById(R.id.Explore_button);
 
         revisitChosen = (TextView) findViewById(R.id.Revisit_chosen);
@@ -127,7 +127,7 @@ public class AMazeActivity extends AppCompatActivity implements AdapterView.OnIt
     public void makeExplorerSpinnerVisible(View view) {
         if (exploreChosen.getVisibility() == View.GONE || exploreChosen.getVisibility() == View.INVISIBLE) {
             exploreChosen.setVisibility(View.VISIBLE);
-            revisitButton.setVisibility(View.INVISIBLE);
+            //revisitButton.setVisibility(View.INVISIBLE);
         }
 
     }
@@ -195,7 +195,7 @@ public class AMazeActivity extends AppCompatActivity implements AdapterView.OnIt
         intent1.putExtra(OPERATIONMODE, keyIdentifierSpinnerOperation);
 
         Log.v("skill level: ", ""+keyIdentifierSeekBarSkillLevel);
-        Log.v("edu.wm.cs.cs301.amazebylukedyer.generation algo is: ", ""+keyIdentifierSpinnerAlgo);
+        Log.v("generation algo is: ", ""+keyIdentifierSpinnerAlgo);
         Log.v("operation mode is: ", ""+keyIdentifierSpinnerOperation);
 
         startActivity(intent1);

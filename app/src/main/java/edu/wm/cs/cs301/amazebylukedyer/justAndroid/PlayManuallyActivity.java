@@ -244,19 +244,19 @@ public class PlayManuallyActivity extends AppCompatActivity {
      */
     public void showWalls(View view) {
         statePlaying.keyDown(Constants.UserInput.ToggleLocalMap, 1);
-        Toast.makeText(getBaseContext(), "If this wasn't a test, I would be showing WALLS", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), "Showing WALLS", Toast.LENGTH_SHORT).show();
         Log.v("Showing: ", "walls");
     }
 
     public void showFullMaze(View view) {
         statePlaying.keyDown(Constants.UserInput.ToggleFullMap, 1);
-        Toast.makeText(getBaseContext(), "If this wasn't a test, I would be showing FULL MAZE", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), "Showing FULL MAZE", Toast.LENGTH_SHORT).show();
         Log.v("Showing: ", "full maze");
     }
 
     public void showSolution(View view) {
         statePlaying.keyDown(Constants.UserInput.ToggleSolution, 1);
-        Toast.makeText(getBaseContext(), "If this wasn't a test, I would be showing SOLUTION", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), "Showing SOLUTION", Toast.LENGTH_SHORT).show();
         Log.v("Showing: ", "solution");
     }
 

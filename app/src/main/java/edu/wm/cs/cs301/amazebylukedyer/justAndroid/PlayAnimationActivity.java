@@ -1,7 +1,5 @@
 package edu.wm.cs.cs301.amazebylukedyer.justAndroid;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import edu.wm.cs.cs301.amazebylukedyer.R;
 
@@ -63,7 +63,7 @@ public class PlayAnimationActivity extends AppCompatActivity {
         showFullMazeButton = (Button) findViewById(R.id.Show_full_maze_button);
         showSolutionButton = (Button) findViewById(R.id.Show_solution_button);
 
-        pausePlayButton = (Button) findViewById(R.id.pause_and_play_button);
+        //pausePlayButton = (Button) findViewById(R.id.pause_and_play_button);
 
         skipButton = (Button) findViewById(R.id.skip_button);
 

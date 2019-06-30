@@ -55,7 +55,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/select_skill_bar" />
 
-    <Button
+   <!-- <Button
         android:id="@+id/Revisit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
         android:onClick="makeRevisitChoicesVisible"
         app:layout_constraintEnd_toStartOf="@+id/Explore_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/generation_selection_title" />
+        app:layout_constraintTop_toBottomOf="@+id/generation_selection_title" /> !-->
 
     <Button
         android:id="@+id/Explore_button"

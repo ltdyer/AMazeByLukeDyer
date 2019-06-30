@@ -33,7 +33,7 @@ public class MazePanel extends View {
         // call super class constructor as necessary
         // TODO: initialize instance variables as necessary
         super(context);
-        bitmap = Bitmap.createBitmap(400, 400, Bitmap.Config.ARGB_8888);
+        bitmap = Bitmap.createBitmap(Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT, Bitmap.Config.ARGB_8888);
         paint = new Paint();
         canvas = new Canvas(bitmap);
 
@@ -47,7 +47,7 @@ public class MazePanel extends View {
         // call super class constructor as necessary
         // TODO: initialize instance variables as necessary
         super(context, app);
-        bitmap = Bitmap.createBitmap(400, 400, Bitmap.Config.ARGB_8888);
+        bitmap = Bitmap.createBitmap(Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT, Bitmap.Config.ARGB_8888);
         paint = new Paint();
         canvas = new Canvas(bitmap);
     }
@@ -60,8 +60,9 @@ public class MazePanel extends View {
     @Override
     public void onDraw(Canvas c) {
         // TODO: draw bitmap
-        super.onDraw(canvas);
-        canvas.drawBitmap(bitmap, 0, 0, paint);
+        super.onDraw(c);
+        System.out.println("Canvas width: " + c.getWidth());
+        c.drawBitmap(bitmap, 0, 0, paint);
         System.out.println("cool");
 
 
@@ -76,7 +77,7 @@ public class MazePanel extends View {
     public void onMeasure(int width, int height) {
         width = this.getMeasuredWidth();
         height = this.getMeasuredHeight();
-        setMeasuredDimension(width, height);
+        setMeasuredDimension(getWidth(), getHeight());
     }
 
     /**
