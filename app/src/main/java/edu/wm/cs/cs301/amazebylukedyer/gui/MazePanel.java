@@ -62,7 +62,8 @@ public class MazePanel extends View {
         // TODO: draw bitmap
         super.onDraw(canvas);
         canvas.drawBitmap(bitmap, 0, 0, paint);
-        invalidate();
+        System.out.println("cool");
+
     }
 
     /**
@@ -106,6 +107,19 @@ public class MazePanel extends View {
         else if("White".equals(c)) {
             paint.setColor(Color.WHITE);
         }
+        else if ("Yellow".equals(c)) {
+            paint.setColor(Color.YELLOW);
+        }
+        else if ("DarkGray".equals(c)) {
+            paint.setColor(Color.DKGRAY);
+
+        }
+        else if ("Pink".equals(c)) {
+            paint.setColor(Color.MAGENTA);
+        }
+        else if ("Cyan".equals(c)) {
+            paint.setColor(Color.CYAN);
+        }
     }
 
     /**
@@ -117,14 +131,42 @@ public class MazePanel extends View {
         paint.setColor(color);
     }
 
+    public void setColor(int color1, int color2, int color3) {
+        paint.setColor(Color.rgb(color1,color2,color3));
+    }
     /**
      * Takes in color integer values [0-255], returns corresponding color-int value.
-     * @param red, green, blue
+
      */
-    public static int getColorEncoding(int red, int green, int blue) {
-        // TODO: provide rgb color encoding
-        int color = Color.rgb(red, green, blue);
-        return color;
+//    public static int getColorEncoding(int red, int green, int blue) {
+//        // TODO: provide rgb color encoding
+//        int color = Color.rgb(red, green, blue);
+//        return color;
+//    }
+    public static class GWColor extends Color {
+
+        private int r, g, b, a = 255;
+        private int RGB = -1;
+        public GWColor(int i, int val1, int val12) {
+            super();
+            r = i;
+            g = val1;
+            b = val12;
+        }
+        public GWColor(int rgb) {
+            super();
+            RGB = rgb;
+        }
+        public int getR() { return r; }
+        public int getG() { return g; }
+        public int getB() { return b; }
+        public int getRGB() {
+            if (RGB != -1) return RGB;
+            return ((a & 0xFF) << 24) |
+                    ((r & 0xFF) << 16) |
+                    ((g & 0xFF) <<  8) |
+                    ((b & 0xFF) <<  0);
+        }
     }
 
     /**

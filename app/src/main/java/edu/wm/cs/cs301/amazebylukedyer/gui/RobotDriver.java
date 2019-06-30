@@ -1,6 +1,6 @@
 package edu.wm.cs.cs301.amazebylukedyer.gui;
 
-import generation.Distance;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Distance;
 
 /**
  * This interface specifies a robot driver that operates a robot to escape from a given maze. 

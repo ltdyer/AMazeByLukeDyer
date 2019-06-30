@@ -32,7 +32,7 @@ import edu.wm.cs.cs301.amazebylukedyer.gui.Constants.UserInput;
  * Refactored by Peter Kemper
  */
 public class StateGenerating extends DefaultState implements Order {
-    MazeView view;
+    //MazeView view;
     MazePanel panel;
     Controller control;
     // Filename if maze is loaded from file, can be null
@@ -111,7 +111,7 @@ public class StateGenerating extends DefaultState implements Order {
         // keep the reference to the panel for drawing
         this.panel = panel;
         // init mazeview, controller is needed for generating screen to update progress bar
-        view = new MazeView(this);
+        //view = new MazeView(this);
         // reset percentage for progress
         percentdone = 0;
         // if given a filename, load maze from file
@@ -209,7 +209,7 @@ public class StateGenerating extends DefaultState implements Order {
      */
     private void draw() {
     	// draw the content on the panel
-    	view.redrawGenerating(panel);
+    	//view.redrawGenerating(panel);
         // update the screen with the buffer graphics
         panel.update() ;
     }

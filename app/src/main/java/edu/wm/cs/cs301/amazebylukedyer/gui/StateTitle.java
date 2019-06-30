@@ -1,6 +1,6 @@
 package edu.wm.cs.cs301.amazebylukedyer.gui;
 
-import gui.Constants.UserInput;
+import edu.wm.cs.cs301.amazebylukedyer.gui.Constants.UserInput;
 
 /**
  * Class handles the user interaction
@@ -30,7 +30,7 @@ import gui.Constants.UserInput;
  * Refactored by Peter Kemper
  */
 public class StateTitle extends DefaultState {
-    MazeView view;
+    //MazeView view;
     MazePanel panel;
     Controller control;
     
@@ -89,10 +89,10 @@ public class StateTitle extends DefaultState {
         // keep the reference to the panel for drawing
         this.panel = panel;
         // init mazeview, controller not needed for title
-        view = new MazeView(null);
+        //view = new MazeView(null);
         // if given a filename, show a message and move to the loading screen
         // otherwise, show message that we wait for the skill level for input
-        view.redrawTitle(panel,filename);
+        //view.redrawTitle(panel,filename);
         panel.update(); // as drawing is complete, make screen update happen
         
         if (filename != null) {

@@ -1,7 +1,5 @@
 package edu.wm.cs.cs301.amazebylukedyer.justAndroid;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import edu.wm.cs.cs301.amazebylukedyer.R;
 import edu.wm.cs.cs301.amazebylukedyer.generation.Cells;
@@ -81,7 +81,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
 
         started = true;
 
-        mazeConfig = dh.getInstance().getMazeConfiguration();
+        mazeConfig = dh.Instance().getMazeConfiguration();
 
         Bundle generatingActivityIntent = getIntent().getExtras();
 
@@ -110,6 +110,8 @@ public class PlayManuallyActivity extends AppCompatActivity {
 
         pathLength = 0;
 
+        mazePanel = findViewById(R.id.panel);
+        statePlaying = new StatePlaying();
 
         //Note: MazeConfig is now the entity that contains the numerical information regarding the width, height, size, etc of the maze that we got from generation
         //We will need that to maybe access those kinds of variables

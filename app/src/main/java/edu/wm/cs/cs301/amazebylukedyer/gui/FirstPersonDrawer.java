@@ -170,7 +170,7 @@ public class FirstPersonDrawer {
 
 		//find out how to do bitmap
 
-		canvas = new Canvas(bitmap);
+		//canvas = new Canvas(bitmap);
 
 		//obtain view using predefined variables
 		setView(x, y, walkStep);
@@ -445,7 +445,7 @@ public class FirstPersonDrawer {
 		// moved code for drawing bits and pieces into yet another method to 
 		// gain more clarity on what information is actually needed
 		Paint paint = new Paint();
-		mp.setColor(seg.getColor());
+		mp.setColor(seg.col.getR(),seg.col.getG(),seg.col.getB());
 		paint.setStyle(Paint.Style.FILL);
 		boolean drawn = drawSegmentPolygons(x1, x2, y11, y12, y21, y22);
 		

@@ -113,7 +113,7 @@ public class StatePlaying extends DefaultState {
         mapMode = false;
         showSolution = false;
 
-        mazeConfig = dataHolder.getInstance().getMazeConfiguration();
+        mazeConfig = dataHolder.Instance().getMazeConfiguration();
         seenCells = new Cells(mazeConfig.getWidth()+1, mazeConfig.getHeight()+1);
 
         setPositionDirectionViewingDirection();

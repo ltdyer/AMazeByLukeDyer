@@ -1,7 +1,7 @@
 package edu.wm.cs.cs301.amazebylukedyer.gui;
 
-import generation.CardinalDirection;
-import generation.MazeConfiguration;
+import edu.wm.cs.cs301.amazebylukedyer.generation.CardinalDirection;
+import edu.wm.cs.cs301.amazebylukedyer.generation.MazeConfiguration;
 
 
 /**

@@ -3,9 +3,9 @@
  */
 package edu.wm.cs.cs301.amazebylukedyer.gui;
 
-import gui.Constants.UserInput;
-import generation.MazeConfiguration;
-import generation.Order.Builder;
+import edu.wm.cs.cs301.amazebylukedyer.gui.Constants.UserInput;
+import edu.wm.cs.cs301.amazebylukedyer.generation.MazeConfiguration;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Order.Builder;
 
 /**
  * This is a default implementation of the State interface

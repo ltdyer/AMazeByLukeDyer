@@ -3,12 +3,12 @@
  */
 package edu.wm.cs.cs301.amazebylukedyer.generation;
 
-import gui.MazeFileWriter;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.util.ArrayList;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import edu.wm.cs.cs301.amazebylukedyer.gui.MazeFileWriter;
 
 /**
  * A leaf node for a tree of BSPNodes. It carries a list of segments. 

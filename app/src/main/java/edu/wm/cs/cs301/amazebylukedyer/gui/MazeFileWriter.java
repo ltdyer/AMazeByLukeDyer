@@ -4,8 +4,8 @@
 package edu.wm.cs.cs301.amazebylukedyer.gui;
 
 
-import generation.BSPNode;
-import generation.Cells;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.io.File;
 
@@ -18,8 +18,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import edu.wm.cs.cs301.amazebylukedyer.generation.BSPNode;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Cells;
 
 /**
  * This class provides functionality to write a maze configuration to a file in an XML format.

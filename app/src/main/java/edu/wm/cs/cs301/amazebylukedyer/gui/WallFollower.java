@@ -1,9 +1,9 @@
 package edu.wm.cs.cs301.amazebylukedyer.gui;
 
-import generation.Distance;
-import generation.MazeConfiguration;
-import gui.Robot.Direction;
-import gui.Robot.Turn;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Distance;
+import edu.wm.cs.cs301.amazebylukedyer.generation.MazeConfiguration;
+import edu.wm.cs.cs301.amazebylukedyer.gui.Robot.Direction;
+import edu.wm.cs.cs301.amazebylukedyer.gui.Robot.Turn;
 
 public class WallFollower implements RobotDriver{
 	

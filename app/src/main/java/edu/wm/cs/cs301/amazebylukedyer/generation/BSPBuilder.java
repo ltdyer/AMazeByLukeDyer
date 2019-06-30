@@ -1,8 +1,9 @@
 package edu.wm.cs.cs301.amazebylukedyer.generation;
 
-import gui.Constants;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import edu.wm.cs.cs301.amazebylukedyer.gui.Constants;
 
 /**
  * This class has the responsibility to obtain the tree of BSP nodes for a given maze.

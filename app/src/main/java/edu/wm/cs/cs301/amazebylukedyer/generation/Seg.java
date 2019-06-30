@@ -1,7 +1,5 @@
 package edu.wm.cs.cs301.amazebylukedyer.generation;
 
-import android.graphics.Color;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -9,8 +7,6 @@ import java.util.ArrayList;
 
 import edu.wm.cs.cs301.amazebylukedyer.gui.MazeFileWriter;
 import edu.wm.cs.cs301.amazebylukedyer.gui.MazePanel;
-
-import static edu.wm.cs.cs301.amazebylukedyer.gui.MazePanel.getColorEncoding;
 
 /**
  * A segment is a continuous sequence of walls in the maze.
@@ -63,7 +59,7 @@ public class Seg {
     /**
      * color of segment, only set by constructor and file reader.
      */
-    private int col;
+    public MazePanel.GWColor col;
     /**
      * partition flag.
      */
@@ -152,31 +148,42 @@ public class Seg {
         final int rgbValue = calculateRGBValue(d);
         switch (((d >> 3) ^ cc) % 6) {
         case 0:
-
-            mp.setColor(getColorEncoding(rgbValue, RGB_DEF, RGB_DEF));
+            //Log.v("getColorEncoding: ", ""+getColorEncoding(rgbValue, rgbValue, RGB_DEF));
+            col = new MazePanel.GWColor(rgbValue, RGB_DEF, RGB_DEF);
             break;
         case 1:
-            mp.setColor(getColorEncoding(RGB_DEF, rgbValue, RGB_DEF));
+            //Log.v("getColorEncoding: ", ""+getColorEncoding(rgbValue, rgbValue, RGB_DEF));
+            //mp.setColor(getColorEncoding(RGB_DEF, rgbValue, RGB_DEF));
+            col = new MazePanel.GWColor(RGB_DEF, rgbValue, RGB_DEF);
             //setColor(col.getColorEncoding(RGB_DEF, rgbValue, RGB_DEF));
             break;
         case 2:
-            mp.setColor(getColorEncoding(RGB_DEF, RGB_DEF, rgbValue));
+            //Log.v("getColorEncoding: ", ""+getColorEncoding(rgbValue, rgbValue, RGB_DEF));
+            //mp.setColor(getColorEncoding(RGB_DEF, RGB_DEF, rgbValue));
+            col = new MazePanel.GWColor(RGB_DEF, RGB_DEF, rgbValue);
             //setColor(new Color(RGB_DEF, RGB_DEF, rgbValue));
             break;
         case 3:
-            mp.setColor(getColorEncoding(rgbValue, rgbValue, RGB_DEF));
+            //Log.v("getColorEncoding: ", ""+getColorEncoding(rgbValue, rgbValue, RGB_DEF));
+            //mp.setColor(getColorEncoding(rgbValue, rgbValue, RGB_DEF));
+            col = new MazePanel.GWColor(rgbValue, rgbValue, RGB_DEF);
             //setColor(new Color(rgbValue, rgbValue, RGB_DEF));
             break;
         case 4:
-            mp.setColor(getColorEncoding(RGB_DEF, rgbValue, rgbValue));
+            //Log.v("getColorEncoding: ", ""+getColorEncoding(rgbValue, rgbValue, RGB_DEF));
+            //mp.setColor(getColorEncoding(RGB_DEF, rgbValue, rgbValue));
+            col = new MazePanel.GWColor(RGB_DEF, rgbValue, rgbValue);
             //setColor(new Color(RGB_DEF, rgbValue, rgbValue));
             break;
         case 5:
-            mp.setColor(getColorEncoding(rgbValue, RGB_DEF, rgbValue));
+            //Log.v("getColorEncoding: ", ""+getColorEncoding(rgbValue, rgbValue, RGB_DEF));
+            //mp.setColor(getColorEncoding(rgbValue, RGB_DEF, rgbValue));
+            col = new MazePanel.GWColor(rgbValue, RGB_DEF, rgbValue);
             //setColor(new Color(rgbValue, RGB_DEF, rgbValue));
             break;
         default:
-            mp.setColor(getColorEncoding(RGB_DEF, RGB_DEF, RGB_DEF));
+            //mp.setColor(getColorEncoding(RGB_DEF, RGB_DEF, RGB_DEF));
+            col = new MazePanel.GWColor(RGB_DEF, RGB_DEF, RGB_DEF);
             //setColor(new Color(RGB_DEF, RGB_DEF, RGB_DEF));
             break;
         }
@@ -264,7 +271,7 @@ public class Seg {
         MazeFileWriter.appendChild(doc, mazeXML, "seenSeg_" + number + "_" + i, isSeen());
         MazeFileWriter.appendChild(doc, mazeXML, "xSeg_" + number + "_" + i, getStartPositionX());
         MazeFileWriter.appendChild(doc, mazeXML, "ySeg_" + number + "_" + i, getStartPositionY());
-        MazeFileWriter.appendChild(doc, mazeXML, "colSeg_" + number + "_" + i, getColor());
+        MazeFileWriter.appendChild(doc, mazeXML, "colSeg_" + number + "_" + i, col.getRGB());
     }
 
     /**
@@ -365,25 +372,25 @@ public class Seg {
     /**
      * @return the color
      */
-    public int getColor() {
-        return col;
-    }
-
-    /**
-     * @param color
-     *            the color to set
-     */
-    public void setColor(int color) {
-        /*
-         * for debugging: use random color settings such that all segments look
-         * different
-         * int r = SingleRandom.getRandom().nextIntWithinInterval(20,240) ;
-         * int g = SingleRandom.getRandom().nextIntWithinInterval(20,240) ;
-         * int b = SingleRandom.getRandom().nextIntWithinInterval(20,240) ;
-         * this.col = new Color(r,g,b); return ;
-         */
-        col = color;
-    }
+//    public int getColor() {
+//        return col;
+//    }
+//
+//    /**
+//     * @param color
+//     *            the color to set
+//     */
+//    public void setColor(int color) {
+//        /*
+//         * for debugging: use random color settings such that all segments look
+//         * different
+//         * int r = SingleRandom.getRandom().nextIntWithinInterval(20,240) ;
+//         * int g = SingleRandom.getRandom().nextIntWithinInterval(20,240) ;
+//         * int b = SingleRandom.getRandom().nextIntWithinInterval(20,240) ;
+//         * this.col = new Color(r,g,b); return ;
+//         */
+//        col = color;
+//    }
 
     /**
      * @return the x

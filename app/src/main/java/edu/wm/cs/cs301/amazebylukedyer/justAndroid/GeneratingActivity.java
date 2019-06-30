@@ -1,20 +1,18 @@
 package edu.wm.cs.cs301.amazebylukedyer.justAndroid;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import edu.wm.cs.cs301.amazebylukedyer.R;
 import edu.wm.cs.cs301.amazebylukedyer.generation.MazeConfiguration;
@@ -22,7 +20,6 @@ import edu.wm.cs.cs301.amazebylukedyer.generation.MazeFactory;
 import edu.wm.cs.cs301.amazebylukedyer.generation.Order;
 import edu.wm.cs.cs301.amazebylukedyer.gui.DataHolder;
 import edu.wm.cs.cs301.amazebylukedyer.gui.MazePanel;
-import edu.wm.cs.cs301.amazebylukedyer.gui.RobotDriver;
 
 import static edu.wm.cs.cs301.amazebylukedyer.generation.Order.Builder.DFS;
 
@@ -84,15 +81,16 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
 
 
 
-        startManualMazePlayButton = (Button) findViewById(R.id.start_button_manual);
-        startAutomaticMazePlayButton = (Button) findViewById(R.id.start_button_robot);
+        //startManualMazePlayButton = (Button) findViewById(R.id.start_button_manual);
+        //startAutomaticMazePlayButton = (Button) findViewById(R.id.start_button_robot);
         progressBar = (ProgressBar) findViewById(R.id.Generating_maze_progress);
         progressBar.setMax(100);
         Drawable draw=getResources().getDrawable(R.drawable.customprogressbar);
         progressBarString = (TextView) findViewById(R.id.Generating_maze_string);
 
         mazefactory = new MazeFactory();
-
+        dh = new DataHolder();
+        progressHandler = new Handler();
 
         if (operationMode.equals("Manual")) {
 
@@ -213,7 +211,7 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
 
         //Now that we're getting this mazeConfiguration returned from the MazeBuilder buildOrder thread, we can set this in our data holder
 
-        dh.setMazeConfiguration(mazeConfig);
+        dh.Instance().setMazeConfiguration(mazeConfig);
         startActivity(intent);
         finish();
 
@@ -222,18 +220,26 @@ public class GeneratingActivity extends AppCompatActivity implements Order {
     @SuppressLint("HandlerLeak")
     @Override
     public void updateProgress(int percentage) {
-        progressHandler = new Handler() {
+        progressHandler.post(new Runnable() {
             @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                if (msg.what < 100) {
-                    progressBar.setProgress(msg.what);
-                    progressBarString.setText("Progress: " + msg.what);
-                }
+            public void run() {
+                progressBar.setProgress(100);
+                progressBarString.setText(100+"%");
             }
-        };
+        });
 
     }
+
+//    progressHandler = new Handler(Looper.getMainLooper()) {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            if (msg.what < 100) {
+//                progressBar.setProgress(msg.what);
+//                progressBarString.setText("Progress: " + msg.what);
+//            }
+//        }
+//    };
 
     /**
      * Makes the corresponding start button visible based on the mode of operation

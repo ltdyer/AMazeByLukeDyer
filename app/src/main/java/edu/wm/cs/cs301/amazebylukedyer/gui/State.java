@@ -3,9 +3,9 @@
  */
 package edu.wm.cs.cs301.amazebylukedyer.gui;
 
-import generation.MazeConfiguration;
-import generation.Order.Builder;
-import gui.Constants.UserInput;
+import edu.wm.cs.cs301.amazebylukedyer.generation.MazeConfiguration;
+import edu.wm.cs.cs301.amazebylukedyer.generation.Order.Builder;
+import edu.wm.cs.cs301.amazebylukedyer.gui.Constants.UserInput;
 
 /**
  * The state interface is used for the controller 

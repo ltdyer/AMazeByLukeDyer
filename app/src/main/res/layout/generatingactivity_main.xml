@@ -33,6 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Generating_maze_string" />
 
+    <!--
     <Button
         android:id="@+id/start_button_manual"
         android:layout_width="wrap_content"
@@ -55,5 +56,5 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" /> !-->
 </androidx.constraintlayout.widget.ConstraintLayout>

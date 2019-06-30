@@ -9,11 +9,17 @@ import edu.wm.cs.cs301.amazebylukedyer.generation.MazeConfiguration;
  */
 public class DataHolder {
 
+    private static DataHolder instance;
     //variables that will be shared
     private Bitmap bitmap;
     private Controller controller;
     private MazeConfiguration mc;
-    private static final DataHolder dh = new DataHolder();
+    public static DataHolder Instance() {
+        if(instance == null) {
+            instance = new DataHolder();
+        }
+        return instance;
+    }
 
     public void setBitmap(Bitmap bit) {
         this.bitmap = bit;
@@ -26,9 +32,7 @@ public class DataHolder {
     public void setMazeConfiguration(MazeConfiguration mazConfig) { this.mc = mazConfig;}
     public MazeConfiguration getMazeConfiguration() { return mc; }
 
-    public static DataHolder getInstance() {
-        return dh;
-    }
+
 
 
 
