@@ -223,12 +223,18 @@ public class StatePlaying extends DefaultState {
             break;
         case Right: // turn right
         	//System.out.println("Cardinal Direction before moving right is " + getCurrentDirection());
+            Log.v("directions is: ", ""+getCurrentDirection());
             rotate(-1);
+            Log.v("directions is: ", ""+getCurrentDirection());
             //System.out.println("Cardinal Direction after moving right is " + getCurrentDirection());
             break;
         case Down: // move backward
         	//System.out.println("Cardinal Direction before moving down is " + getCurrentDirection());
+            Log.v("x position is: ", ""+(getCurrentPosition()[0]));
+            Log.v("y position is: ", ""+(getCurrentPosition()[1]));
             walk(-1);
+            Log.v("x position is: ", ""+(getCurrentPosition()[0]));
+            Log.v("y position is: ", ""+(getCurrentPosition()[1]));
             // check termination, did we leave the maze?
             if (isOutside(px,py)) {
                 return false;

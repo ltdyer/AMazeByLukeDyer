@@ -61,9 +61,8 @@ public class MazePanel extends View {
     public void onDraw(Canvas c) {
         // TODO: draw bitmap
         super.onDraw(c);
-        System.out.println("Canvas width: " + c.getWidth());
         c.drawBitmap(bitmap, 0, 0, paint);
-        System.out.println("cool");
+        System.out.println("onDraw called");
 
 
     }
