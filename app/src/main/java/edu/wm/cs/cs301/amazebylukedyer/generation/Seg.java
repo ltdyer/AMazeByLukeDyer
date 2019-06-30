@@ -59,7 +59,7 @@ public class Seg {
     /**
      * color of segment, only set by constructor and file reader.
      */
-    public MazePanel.GWColor col;
+    public MazePanel.ColorEncoding col;
     /**
      * partition flag.
      */
@@ -149,41 +149,41 @@ public class Seg {
         switch (((d >> 3) ^ cc) % 6) {
         case 0:
             //Log.v("getColorEncoding: ", ""+getColorEncoding(rgbValue, rgbValue, RGB_DEF));
-            col = new MazePanel.GWColor(rgbValue, RGB_DEF, RGB_DEF);
+            col = new MazePanel.ColorEncoding(rgbValue, RGB_DEF, RGB_DEF);
             break;
         case 1:
             //Log.v("getColorEncoding: ", ""+getColorEncoding(rgbValue, rgbValue, RGB_DEF));
             //mp.setColor(getColorEncoding(RGB_DEF, rgbValue, RGB_DEF));
-            col = new MazePanel.GWColor(RGB_DEF, rgbValue, RGB_DEF);
+            col = new MazePanel.ColorEncoding(RGB_DEF, rgbValue, RGB_DEF);
             //setColor(col.getColorEncoding(RGB_DEF, rgbValue, RGB_DEF));
             break;
         case 2:
             //Log.v("getColorEncoding: ", ""+getColorEncoding(rgbValue, rgbValue, RGB_DEF));
             //mp.setColor(getColorEncoding(RGB_DEF, RGB_DEF, rgbValue));
-            col = new MazePanel.GWColor(RGB_DEF, RGB_DEF, rgbValue);
+            col = new MazePanel.ColorEncoding(RGB_DEF, RGB_DEF, rgbValue);
             //setColor(new Color(RGB_DEF, RGB_DEF, rgbValue));
             break;
         case 3:
             //Log.v("getColorEncoding: ", ""+getColorEncoding(rgbValue, rgbValue, RGB_DEF));
             //mp.setColor(getColorEncoding(rgbValue, rgbValue, RGB_DEF));
-            col = new MazePanel.GWColor(rgbValue, rgbValue, RGB_DEF);
+            col = new MazePanel.ColorEncoding(rgbValue, rgbValue, RGB_DEF);
             //setColor(new Color(rgbValue, rgbValue, RGB_DEF));
             break;
         case 4:
             //Log.v("getColorEncoding: ", ""+getColorEncoding(rgbValue, rgbValue, RGB_DEF));
             //mp.setColor(getColorEncoding(RGB_DEF, rgbValue, rgbValue));
-            col = new MazePanel.GWColor(RGB_DEF, rgbValue, rgbValue);
+            col = new MazePanel.ColorEncoding(RGB_DEF, rgbValue, rgbValue);
             //setColor(new Color(RGB_DEF, rgbValue, rgbValue));
             break;
         case 5:
             //Log.v("getColorEncoding: ", ""+getColorEncoding(rgbValue, rgbValue, RGB_DEF));
             //mp.setColor(getColorEncoding(rgbValue, RGB_DEF, rgbValue));
-            col = new MazePanel.GWColor(rgbValue, RGB_DEF, rgbValue);
+            col = new MazePanel.ColorEncoding(rgbValue, RGB_DEF, rgbValue);
             //setColor(new Color(rgbValue, RGB_DEF, rgbValue));
             break;
         default:
             //mp.setColor(getColorEncoding(RGB_DEF, RGB_DEF, RGB_DEF));
-            col = new MazePanel.GWColor(RGB_DEF, RGB_DEF, RGB_DEF);
+            col = new MazePanel.ColorEncoding(RGB_DEF, RGB_DEF, RGB_DEF);
             //setColor(new Color(RGB_DEF, RGB_DEF, RGB_DEF));
             break;
         }
@@ -271,7 +271,7 @@ public class Seg {
         MazeFileWriter.appendChild(doc, mazeXML, "seenSeg_" + number + "_" + i, isSeen());
         MazeFileWriter.appendChild(doc, mazeXML, "xSeg_" + number + "_" + i, getStartPositionX());
         MazeFileWriter.appendChild(doc, mazeXML, "ySeg_" + number + "_" + i, getStartPositionY());
-        MazeFileWriter.appendChild(doc, mazeXML, "colSeg_" + number + "_" + i, col.getRGB());
+        //MazeFileWriter.appendChild(doc, mazeXML, "colSeg_" + number + "_" + i, col.getRGB());
     }
 
     /**

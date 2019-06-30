@@ -6,7 +6,6 @@ package edu.wm.cs.cs301.amazebylukedyer.gui;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 
 import edu.wm.cs.cs301.amazebylukedyer.generation.CardinalDirection;
 import edu.wm.cs.cs301.amazebylukedyer.generation.Cells;
@@ -164,10 +163,10 @@ public class MapDrawer {
 		final int mazeWidth = mazeConfig.getWidth() ;
 		final int mazeHeight = mazeConfig.getHeight() ;
 
-		Paint paint = new Paint();
-		paint.setColor(Color.WHITE);
-		Bitmap bitmap = DataHolder.Instance().getBitmap();
-		Canvas canvas = new Canvas(bitmap);
+//		Paint paint = new Paint();
+//		paint.setColor(Color.WHITE);
+//		Bitmap bitmap = DataHolder.Instance().getBitmap();
+//		Canvas canvas = new Canvas(bitmap);
 
 		
 		// note: 1/2 of width and height is the center of the screen
@@ -208,7 +207,7 @@ public class MapDrawer {
 						mazeConfig.hasWall(x,y, CardinalDirection.West) :
 							mazeConfig.hasWall((x-1),y, CardinalDirection.East));
 
-				paint.setColor(seenCells.hasWall(x,y, CardinalDirection.West) ? Color.WHITE : Color.GRAY);
+				mp.setColor(seenCells.hasWall(x,y, CardinalDirection.West) ? Color.WHITE : Color.GRAY);
 				if ((seenCells.hasWall(x,y, CardinalDirection.West) || showMaze) && theCondition)
 					mp.drawLine(startX, startY, startX, startY - mapScale); // x coordinate same
 			}
@@ -326,11 +325,11 @@ public class MapDrawer {
 	 */
 	private void drawCurrentLocation(MazePanel mp, int viewDX, int viewDY) {
 
-		Paint paint = new Paint();
-		//Bitmap bitmap
-		Canvas canvas = new Canvas(bitmap);
-		mp.setColor(Color.WHITE);
-		paint.setStyle(Paint.Style.FILL);
+//		Paint paint = new Paint();
+//		Bitmap bitmap
+//		Canvas canvas = new Canvas(bitmap);
+//		mp.setColor(Color.WHITE);
+//		paint.setStyle(Paint.Style.FILL);
 
 		// draw oval of appropriate size at the center of the screen
 		int centerX = viewWidth/2; // center x
@@ -355,11 +354,11 @@ public class MapDrawer {
 	 */
 	private void drawArrow(MazePanel mp, int viewDX, int viewDY, final int startX, final int startY) {
 
-		//Bitmap bitmap
-		Canvas canvas = new Canvas(bitmap);
-		Paint paint = new Paint();
-		paint.setColor(Color.WHITE);
-		paint.setStyle(Paint.Style.FILL);
+//		//Bitmap bitmap
+//		Canvas canvas = new Canvas(bitmap);
+//		Paint paint = new Paint();
+//		paint.setColor(Color.WHITE);
+//		paint.setStyle(Paint.Style.FILL);
 
 		// calculate length and coordinates for main line
 		final int arrowLength = mapScale*7/16; // arrow length, about 1/2 map_scale
@@ -405,10 +404,10 @@ public class MapDrawer {
 	private void drawSolution(MazePanel mp, int offsetX, int offsetY, int px, int py) {
 
 		//Bitmap bitmap
-		Canvas canvas = new Canvas(bitmap);
-		Paint paint = new Paint();
-		paint.setColor(Color.WHITE);
-		paint.setStyle(Paint.Style.FILL);
+//		Canvas canvas = new Canvas(bitmap);
+//		Paint paint = new Paint();
+//		paint.setColor(Color.WHITE);
+//		paint.setStyle(Paint.Style.FILL);
 
 		if (!mazeConfig.isValidPosition(px, py)) {
 			dbg(" Parameter error: position out of bounds: (" + px + "," + 

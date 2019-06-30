@@ -51,6 +51,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Show_full_maze_button"></LinearLayout>
 
+    <!--
     <Button
         android:id="@+id/pause_and_play_button"
         android:layout_width="wrap_content"
@@ -67,7 +68,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.343"
-        android:onClick="pausePlayClick"/>
+        android:onClick="pausePlayClick"/> !-->
 
 
     <Button

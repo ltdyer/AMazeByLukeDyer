@@ -40,6 +40,7 @@ public class PlayManuallyActivity extends AppCompatActivity {
     private Button skipButton;
 
     private int pathLength;
+    private boolean moveResult;
 
     MazeConfiguration mazeConfig;
     DataHolder dh;
@@ -115,70 +116,71 @@ public class PlayManuallyActivity extends AppCompatActivity {
 
         //Note: MazeConfig is now the entity that contains the numerical information regarding the width, height, size, etc of the maze that we got from generation
         //We will need that to maybe access those kinds of variables
+
         statePlaying.start(mazePanel);
 
     }
 
 
-    public void start(MazePanel mazePanel) {
-        started = true;
-
-        this.mazePanel = mazePanel;
-        showWalls = false;
-        showFullMaze = false;
-        showSolution = false;
-
-        seenCells = new Cells(mazeConfig.getWidth()+1, mazeConfig.getHeight()+1);
-
-        setPositionDirectionViewingDirection();
-
-        walkStep = 0;
-        startDrawing();
-
-
-    }
-
-    public void startDrawing() {
-        firstPersonDrawer = new FirstPersonDrawer(Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT, Constants.MAP_UNIT, Constants.STEP_SIZE, seenCells, mazeConfig.getRootnode());
-        mapDrawer = new MapDrawer(seenCells, 15, mazeConfig);
-        draw();
-    }
-
-
-    public void setPositionDirectionViewingDirection() {
-        int start[] = mazeConfig.getStartingPosition();
-        setCurrentPosition(start[0], start[1]);
-        angle = 0;
-        setDirectionToMatchCurrentAngle();
-
-    }
-
-
-    public void setCurrentPosition(int x, int y) {
-        px = x;
-        py = y;
-    }
-    private void setCurrentDirection(int x, int y) {
-        dx = x ;
-        dy = y ;
-    }
-
-    public void setDirectionToMatchCurrentAngle() {
-        setCurrentDirection((int) Math.cos(radify(angle)), (int) Math.sin(radify(angle))) ;
-    }
-
-    final double radify(int x) {
-
-        return x*Math.PI/180;
-    }
-
-    public void draw() {
-        firstPersonDrawer.draw(mazePanel, px, py, walkStep, angle);
-        if (isInShowWallsMode()) {
-            mapDrawer.draw(mazePanel, px, py, angle, walkStep, isInShowFullMazeMode(), isInShowSolutionMode());
-        }
-        mazePanel.update();
-    }
+//    public void start(MazePanel mazePanel) {
+//        started = true;
+//
+//        this.mazePanel = mazePanel;
+//        showWalls = false;
+//        showFullMaze = false;
+//        showSolution = false;
+//
+//        seenCells = new Cells(mazeConfig.getWidth()+1, mazeConfig.getHeight()+1);
+//
+//        setPositionDirectionViewingDirection();
+//
+//        walkStep = 0;
+//        startDrawing();
+//
+//
+//    }
+//
+//    public void startDrawing() {
+//        firstPersonDrawer = new FirstPersonDrawer(Constants.VIEW_WIDTH, Constants.VIEW_HEIGHT, Constants.MAP_UNIT, Constants.STEP_SIZE, seenCells, mazeConfig.getRootnode());
+//        mapDrawer = new MapDrawer(seenCells, 15, mazeConfig);
+//        draw();
+//    }
+//
+//
+//    public void setPositionDirectionViewingDirection() {
+//        int start[] = mazeConfig.getStartingPosition();
+//        setCurrentPosition(start[0], start[1]);
+//        angle = 0;
+//        setDirectionToMatchCurrentAngle();
+//
+//    }
+//
+//
+//    public void setCurrentPosition(int x, int y) {
+//        px = x;
+//        py = y;
+//    }
+//    private void setCurrentDirection(int x, int y) {
+//        dx = x ;
+//        dy = y ;
+//    }
+//
+//    public void setDirectionToMatchCurrentAngle() {
+//        setCurrentDirection((int) Math.cos(radify(angle)), (int) Math.sin(radify(angle))) ;
+//    }
+//
+//    final double radify(int x) {
+//
+//        return x*Math.PI/180;
+//    }
+//
+//    public void draw() {
+//        firstPersonDrawer.draw(mazePanel, px, py, walkStep, angle);
+//        if (isInShowWallsMode()) {
+//            mapDrawer.draw(mazePanel, px, py, angle, walkStep, isInShowFullMazeMode(), isInShowSolutionMode());
+//        }
+//        mazePanel.update();
+//    }
 
 
     boolean isInShowWallsMode() {
@@ -196,16 +198,30 @@ public class PlayManuallyActivity extends AppCompatActivity {
      */
 
     public void forwardClick(View view) {
-        statePlaying.keyDown(Constants.UserInput.Up, 1);
+        moveResult = statePlaying.keyDown(Constants.UserInput.Up, 1);
         pathLength += 1;
         Toast.makeText(getBaseContext(), "Up!", Toast.LENGTH_SHORT).show();
         Log.v("movement: ", "forward");
+        if (moveResult) {
+            Log.v("move result: ", "true");
+        }
+        else {
+            Log.v("move result: ", "false");
+            changeToFinishActivity(view);
+        }
     }
 
     public void downClick(View view) {
-        statePlaying.keyDown(Constants.UserInput.Down, 1);
+        moveResult = statePlaying.keyDown(Constants.UserInput.Down, 1);
         Toast.makeText(getBaseContext(), "Backwards!", Toast.LENGTH_SHORT).show();
         Log.v("movement: ", "backwards");
+        if (moveResult) {
+            Log.v("move result: ", "true");
+        }
+        else {
+            Log.v("move result: ", "false");
+            changeToFinishActivity(view);
+        }
     }
 
 

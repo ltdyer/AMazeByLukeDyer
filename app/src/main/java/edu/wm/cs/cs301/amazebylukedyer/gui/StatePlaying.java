@@ -1,5 +1,7 @@
 package edu.wm.cs.cs301.amazebylukedyer.gui;
 
+import android.util.Log;
+
 import edu.wm.cs.cs301.amazebylukedyer.generation.CardinalDirection;
 import edu.wm.cs.cs301.amazebylukedyer.generation.Cells;
 import edu.wm.cs.cs301.amazebylukedyer.generation.MazeConfiguration;
@@ -196,10 +198,17 @@ public class StatePlaying extends DefaultState {
             break;
         case Up: // move forward
         	//System.out.println("Cardinal Direction before moving up is " + getCurrentDirection());
+            Log.v("x position is: ", ""+(getCurrentPosition()[0]));
+            Log.v("y position is: ", ""+(getCurrentPosition()[1]));
             walk(1);
+            Log.v("x position is: ", ""+(getCurrentPosition()[0]));
+            Log.v("y position is: ", ""+(getCurrentPosition()[1]));
+
+            //may have to draw() again after these to update the visuals but idk since I can't see nothin
             
             // check termination, did we leave the maze?
             if (isOutside(px,py)) {
+                return false;
                 //control.switchFromPlayingToWinning(0);
                 //pma.changeToFinishActivity();
             }
@@ -207,7 +216,9 @@ public class StatePlaying extends DefaultState {
             break;
         case Left: // turn left
         	//System.out.println("Cardinal Direction before moving left is " + getCurrentDirection());
+            Log.v("directions is: ", ""+getCurrentDirection());
             rotate(1);
+            Log.v("directions is: ", ""+getCurrentDirection());
            // System.out.println("Cardinal Direction after moving left is " + getCurrentDirection());
             break;
         case Right: // turn right
@@ -220,7 +231,8 @@ public class StatePlaying extends DefaultState {
             walk(-1);
             // check termination, did we leave the maze?
             if (isOutside(px,py)) {
-                control.switchFromPlayingToWinning(0);
+                return false;
+                //control.switchFromPlayingToWinning(0);
             }
             //System.out.println("Cardinal Direction after moving down is " + getCurrentDirection());
             break;
@@ -238,17 +250,20 @@ public class StatePlaying extends DefaultState {
             // precondition for showMaze and showSolution to be effective
             // acts as a toggle switch
             mapMode = !mapMode;         
-            draw() ; 
+            draw() ;
+            Log.v("Local map:", "drawn");
             break;
         case ToggleFullMap: // its the Z key. show the whole maze
             // acts as a toggle switch
             showMaze = !showMaze;       
-            draw() ; 
+            draw() ;
+            Log.v("Full map:", "drawn");
             break;
         case ToggleSolution: // its the S key. show the solution as a yellow line towards the exit
             // acts as a toggle switch
             showSolution = !showSolution;       
             draw() ;
+            Log.v("Solution:", "drawn");
             break;
         case ZoomIn: // zoom into map
         	adjustMapScale(true);

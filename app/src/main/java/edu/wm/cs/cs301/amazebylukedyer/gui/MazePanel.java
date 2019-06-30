@@ -64,6 +64,7 @@ public class MazePanel extends View {
         canvas.drawBitmap(bitmap, 0, 0, paint);
         System.out.println("cool");
 
+
     }
 
     /**
@@ -143,29 +144,33 @@ public class MazePanel extends View {
 //        int color = Color.rgb(red, green, blue);
 //        return color;
 //    }
-    public static class GWColor extends Color {
 
-        private int r, g, b, a = 255;
+    //modified from StackOverflow
+    public static class ColorEncoding extends Color {
+
         private int RGB = -1;
-        public GWColor(int i, int val1, int val12) {
+        private int r, g, b, a = 255;
+
+        public ColorEncoding(int i, int j, int k) {
             super();
             r = i;
-            g = val1;
-            b = val12;
+            g = j;
+            b = k;
         }
-        public GWColor(int rgb) {
+        public ColorEncoding(int rgb) {
             super();
             RGB = rgb;
         }
-        public int getR() { return r; }
-        public int getG() { return g; }
-        public int getB() { return b; }
-        public int getRGB() {
-            if (RGB != -1) return RGB;
-            return ((a & 0xFF) << 24) |
-                    ((r & 0xFF) << 16) |
-                    ((g & 0xFF) <<  8) |
-                    ((b & 0xFF) <<  0);
+
+        public int getR() {
+            return r;
+        }
+
+        public int getG() {
+            return g;
+        }
+        public int getB() {
+            return b;
         }
     }
 
